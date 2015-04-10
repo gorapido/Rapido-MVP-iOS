@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA521AD89081006FED5F /* AppDelegate.swift */; };
+		FA78AA551AD89081006FED5F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA541AD89081006FED5F /* FirstViewController.swift */; };
+		FA78AA571AD89081006FED5F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA561AD89081006FED5F /* SecondViewController.swift */; };
+		FA78AA5A1AD89081006FED5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA581AD89081006FED5F /* Main.storyboard */; };
+		FA78AA5C1AD89081006FED5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA5B1AD89081006FED5F /* Images.xcassets */; };
+		FA78AA5F1AD89081006FED5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */; };
+		FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA6A1AD89081006FED5F /* RapidoTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA78AA651AD89081006FED5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA78AA451AD89081006FED5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA78AA4C1AD89081006FED5F;
+			remoteInfo = Rapido;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA78AA4D1AD89081006FED5F /* Rapido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rapido.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA78AA511AD89081006FED5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA78AA521AD89081006FED5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA78AA541AD89081006FED5F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		FA78AA561AD89081006FED5F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FA78AA591AD89081006FED5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA78AA5B1AD89081006FED5F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FA78AA5E1AD89081006FED5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FA78AA641AD89081006FED5F /* RapidoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RapidoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA78AA691AD89081006FED5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA78AA6A1AD89081006FED5F /* RapidoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidoTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA78AA4A1AD89081006FED5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA78AA611AD89081006FED5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA78AA441AD89081006FED5F = {
+			isa = PBXGroup;
+			children = (
+				FA78AA4F1AD89081006FED5F /* Rapido */,
+				FA78AA671AD89081006FED5F /* RapidoTests */,
+				FA78AA4E1AD89081006FED5F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA78AA4E1AD89081006FED5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA78AA4D1AD89081006FED5F /* Rapido.app */,
+				FA78AA641AD89081006FED5F /* RapidoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA78AA4F1AD89081006FED5F /* Rapido */ = {
+			isa = PBXGroup;
+			children = (
+				FA78AA521AD89081006FED5F /* AppDelegate.swift */,
+				FA78AA541AD89081006FED5F /* FirstViewController.swift */,
+				FA78AA561AD89081006FED5F /* SecondViewController.swift */,
+				FA78AA581AD89081006FED5F /* Main.storyboard */,
+				FA78AA5B1AD89081006FED5F /* Images.xcassets */,
+				FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */,
+				FA78AA501AD89081006FED5F /* Supporting Files */,
+			);
+			path = Rapido;
+			sourceTree = "<group>";
+		};
+		FA78AA501AD89081006FED5F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA78AA511AD89081006FED5F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA78AA671AD89081006FED5F /* RapidoTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA78AA6A1AD89081006FED5F /* RapidoTests.swift */,
+				FA78AA681AD89081006FED5F /* Supporting Files */,
+			);
+			path = RapidoTests;
+			sourceTree = "<group>";
+		};
+		FA78AA681AD89081006FED5F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA78AA691AD89081006FED5F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA78AA4C1AD89081006FED5F /* Rapido */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA78AA6E1AD89081006FED5F /* Build configuration list for PBXNativeTarget "Rapido" */;
+			buildPhases = (
+				FA78AA491AD89081006FED5F /* Sources */,
+				FA78AA4A1AD89081006FED5F /* Frameworks */,
+				FA78AA4B1AD89081006FED5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rapido;
+			productName = Rapido;
+			productReference = FA78AA4D1AD89081006FED5F /* Rapido.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA78AA631AD89081006FED5F /* RapidoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA78AA711AD89081006FED5F /* Build configuration list for PBXNativeTarget "RapidoTests" */;
+			buildPhases = (
+				FA78AA601AD89081006FED5F /* Sources */,
+				FA78AA611AD89081006FED5F /* Frameworks */,
+				FA78AA621AD89081006FED5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA78AA661AD89081006FED5F /* PBXTargetDependency */,
+			);
+			name = RapidoTests;
+			productName = RapidoTests;
+			productReference = FA78AA641AD89081006FED5F /* RapidoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA78AA451AD89081006FED5F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = Rapido;
+				TargetAttributes = {
+					FA78AA4C1AD89081006FED5F = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					FA78AA631AD89081006FED5F = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = FA78AA4C1AD89081006FED5F;
+					};
+				};
+			};
+			buildConfigurationList = FA78AA481AD89081006FED5F /* Build configuration list for PBXProject "Rapido" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA78AA441AD89081006FED5F;
+			productRefGroup = FA78AA4E1AD89081006FED5F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA78AA4C1AD89081006FED5F /* Rapido */,
+				FA78AA631AD89081006FED5F /* RapidoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA78AA4B1AD89081006FED5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA78AA5A1AD89081006FED5F /* Main.storyboard in Resources */,
+				FA78AA5F1AD89081006FED5F /* LaunchScreen.xib in Resources */,
+				FA78AA5C1AD89081006FED5F /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA78AA621AD89081006FED5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA78AA491AD89081006FED5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA78AA571AD89081006FED5F /* SecondViewController.swift in Sources */,
+				FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */,
+				FA78AA551AD89081006FED5F /* FirstViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA78AA601AD89081006FED5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA78AA661AD89081006FED5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA78AA4C1AD89081006FED5F /* Rapido */;
+			targetProxy = FA78AA651AD89081006FED5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA78AA581AD89081006FED5F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA78AA591AD89081006FED5F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA78AA5E1AD89081006FED5F /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA78AA6C1AD89081006FED5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FA78AA6D1AD89081006FED5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA78AA6F1AD89081006FED5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Rapido/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FA78AA701AD89081006FED5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Rapido/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FA78AA721AD89081006FED5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RapidoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rapido.app/Rapido";
+			};
+			name = Debug;
+		};
+		FA78AA731AD89081006FED5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RapidoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rapido.app/Rapido";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA78AA481AD89081006FED5F /* Build configuration list for PBXProject "Rapido" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA78AA6C1AD89081006FED5F /* Debug */,
+				FA78AA6D1AD89081006FED5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA78AA6E1AD89081006FED5F /* Build configuration list for PBXNativeTarget "Rapido" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA78AA6F1AD89081006FED5F /* Debug */,
+				FA78AA701AD89081006FED5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FA78AA711AD89081006FED5F /* Build configuration list for PBXNativeTarget "RapidoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA78AA721AD89081006FED5F /* Debug */,
+				FA78AA731AD89081006FED5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA78AA451AD89081006FED5F /* Project object */;
+}
