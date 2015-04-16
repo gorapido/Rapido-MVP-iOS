@@ -17,6 +17,9 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
     
     var sessionNVC: UINavigationController?
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,9 +29,15 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
     override func viewDidAppear(animated: Bool) {
         //PFUser.logOut()
         
-        var user = PFUser.currentUser()
-        
-        if user == nil {
+        if var user = PFUser.currentUser() {
+            var firstName = user["firstName"] as! String
+            var lastName = user["lastName"] as! String
+            var email = user["email"] as! String
+            
+            nameLabel.text = "\(firstName) \(lastName)"
+            emailLabel.text = email
+        }
+        else {
             goToSessionNVC()
         }
     }

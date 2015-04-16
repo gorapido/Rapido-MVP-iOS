@@ -13,15 +13,15 @@ class CompanyViewController: UIViewController {
     var name: String?
     var summary: String?
     
-    @IBOutlet weak var logoUIImageView: UIImageView!
-    @IBOutlet weak var nameUILabel: UILabel!
-    @IBOutlet weak var summaryUITextView: UITextView!
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var summaryTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameUILabel.text = name
-        summaryUITextView.text = summary
+        nameLabel.text = name
+        summaryTextView.text = summary
     }
 
     override func didReceiveMemoryWarning() {
