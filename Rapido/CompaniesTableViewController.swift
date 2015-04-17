@@ -68,7 +68,7 @@ class CompaniesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("companyVCSegue", sender: companies[indexPath.row])
+        performSegueWithIdentifier("companyVCSegue", sender: companies[indexPath.row])
     }
     
     /*

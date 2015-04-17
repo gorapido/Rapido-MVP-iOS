@@ -450,9 +450,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="lwd-HF-ySi" kind="show" id="PsO-oC-ofj"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -546,11 +543,12 @@
                     <connections>
                         <outlet property="emailLabel" destination="pPV-zu-9p6" id="uMR-AM-hHS"/>
                         <outlet property="nameLabel" destination="RXk-10-EEq" id="tps-qJ-FUr"/>
+                        <segue destination="lwd-HF-ySi" kind="show" identifier="passwordTCVSegue" id="hcc-ek-yJg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sS-e8-nG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="753" y="989"/>
+            <point key="canvasLocation" x="0.0" y="1955"/>
         </scene>
         <!--Name-->
         <scene sceneID="LDo-6O-Kv7">
@@ -622,7 +620,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ye3-S7-3h6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542" y="989"/>
+            <point key="canvasLocation" x="0.0" y="2823"/>
         </scene>
         <!--Email-->
         <scene sceneID="Rm3-Sk-pgs">
@@ -671,7 +669,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtI-sN-LjZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542" y="1852"/>
+            <point key="canvasLocation" x="789" y="2818"/>
         </scene>
         <!--Password-->
         <scene sceneID="SFm-ZR-MfC">
@@ -734,7 +732,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVs-sg-98v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="753" y="1852"/>
+            <point key="canvasLocation" x="753" y="1955"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9sR-Zq-FZA">

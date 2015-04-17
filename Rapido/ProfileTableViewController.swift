@@ -57,6 +57,33 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
             
             goToSessionNVC()
         }
+        else if indexPath.section == 1 {
+            if (indexPath.row == 2) {
+                var alert = UIAlertController(title: "Sign In to Rapido", message: "Enter your Rapido password to continue.", preferredStyle: .Alert)
+                
+                alert.addTextFieldWithConfigurationHandler({ passwd in
+                    passwd.secureTextEntry = true
+                    passwd.placeholder = "password"
+                    })
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .Default) { action in
+                    let passwd = alert.textFields![0] as! UITextField;
+                    var user = PFUser.currentUser()!
+                    
+                    PFUser.logInWithUsernameInBackground(user.email!, password: passwd.text) { (user: PFUser?, err: NSError?) -> Void in
+                        if user != nil {
+                            self.performSegueWithIdentifier("passwordTCVSegue", sender: nil)
+                        }
+                    }
+                    })
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+                    
+                    })
+                
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     func goToSessionNVC() {
