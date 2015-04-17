@@ -10,14 +10,14 @@ import UIKit
 
 class PasswordTableViewController: UITableViewController {
 
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        passwordTextField.secureTextEntry = true
+        confirmPasswordTextField.secureTextEntry = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +25,21 @@ class PasswordTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func confirmPasswordEditingDidEnd(sender: AnyObject) {
+        if passwordTextField.text == confirmPasswordTextField.text {
+            var user = PFUser.currentUser()
+            
+            user?.password = passwordTextField.text
+            user?.saveInBackgroundWithBlock() { (success: Bool, err: NSError?) -> Void in
+                if success {
+                    println("yay")
+                }
+                else {
+                    
+                }
+            }
+        }
+    }
     /*
     // MARK: - Table view data source
 

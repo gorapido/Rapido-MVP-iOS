@@ -7,15 +7,8 @@
 //
 
 import UIKit
-import Parse
 
-protocol SessionNVCDelegate {
-    func signedInSuccessfully()
-}
-
-class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
-    
-    var sessionNVC: UINavigationController?
+class ProfileTableViewController: UITableViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -26,9 +19,7 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        //PFUser.logOut()
-        
+    override func viewWillAppear(animated: Bool) {
         if var user = PFUser.currentUser() {
             var firstName = user["firstName"] as! String
             var lastName = user["lastName"] as! String
@@ -37,9 +28,6 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
             nameLabel.text = "\(firstName) \(lastName)"
             emailLabel.text = email
         }
-        else {
-            goToSessionNVC()
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,15 +35,11 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func signedInSuccessfully() {
-        sessionNVC?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 3 && indexPath.row == 0 {
             PFUser.logOut()
             
-            goToSessionNVC()
+            tabBarController?.selectedIndex = 0
         }
         else if indexPath.section == 1 {
             if (indexPath.row == 2) {
@@ -74,6 +58,9 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
                         if user != nil {
                             self.performSegueWithIdentifier("passwordTCVSegue", sender: nil)
                         }
+                        else {
+                            
+                        }
                     }
                     })
                 
@@ -84,16 +71,6 @@ class ProfileTableViewController: UITableViewController, SessionNVCDelegate {
                 presentViewController(alert, animated: true, completion: nil)
             }
         }
-    }
-    
-    func goToSessionNVC() {
-        sessionNVC = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
-        
-        var signInVC = sessionNVC?.viewControllers.first as! SignInViewController
-        
-        signInVC.delegate = self
-        
-        presentViewController(sessionNVC!, animated: true, completion: nil)
     }
     
     /*

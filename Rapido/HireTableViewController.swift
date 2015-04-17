@@ -8,18 +8,31 @@
 
 import UIKit
 
-class HireTableViewController: UITableViewController {
+protocol SessionNVCDelegate {
+    func signedInSuccessfully()
+}
+
+class HireTableViewController: UITableViewController, SessionNVCDelegate {
     
     let categories = ["HVAC", "Plumbing", "Electricity", "Other"]
+    var sessionNVC: UINavigationController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        var user = PFUser.currentUser()
+        
+        if user == nil {
+            sessionNVC = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
+            
+            var signInVC = sessionNVC?.viewControllers.first as! SignInViewController
+            
+            signInVC.delegate = self
+            
+            presentViewController(sessionNVC!, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +62,10 @@ class HireTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("companiesTVCSegue", sender: nil)
+    }
+    
+    func signedInSuccessfully() {
+        sessionNVC?.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
