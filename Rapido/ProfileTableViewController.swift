@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class ProfileTableViewController: UITableViewController {
+class ProfileTableViewController: UITableViewController, UIActionSheetDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
@@ -21,6 +23,14 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         if var user = PFUser.currentUser() {
+            let avatar = user["avatar"] as? PFFile
+            
+            avatar?.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
+                let image = UIImage(data: data!)
+                
+                self.avatarImageView.image = image
+            })
+            
             var firstName = user["firstName"] as! String
             var lastName = user["lastName"] as! String
             var email = user["email"] as! String
@@ -71,6 +81,68 @@ class ProfileTableViewController: UITableViewController {
                 presentViewController(alert, animated: true, completion: nil)
             }
         }
+        else if indexPath.section == 0 && indexPath.row == 0 {
+            let imageActionSheet = UIActionSheet()
+            
+            imageActionSheet.delegate = self
+            
+            imageActionSheet.addButtonWithTitle("Take selfie")
+            imageActionSheet.addButtonWithTitle("Choose existing photo")
+            imageActionSheet.addButtonWithTitle("Cancel")
+            
+            imageActionSheet.cancelButtonIndex = 2
+            
+            imageActionSheet.showInView(self.view)
+        }
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.mediaTypes = [kUTTypeImage as NSString]
+        
+        switch buttonIndex {
+        case 0:
+            picker.sourceType = UIImagePickerControllerSourceType.Camera
+
+            presentViewController(picker, animated: true, completion: nil)
+            break
+        case 1:
+            picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            
+            presentViewController(picker, animated: true, completion: nil)
+            break
+        default:
+            break
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        let user = PFUser.currentUser()
+        
+        let data = UIImageJPEGRepresentation(image, image.scale) as NSData
+        
+        let objectId = user?.valueForKey("objectId") as! String
+        
+        let avatar = PFFile(name: "\(objectId)-avatar.jpg", data: data)
+        
+        avatar.saveInBackgroundWithBlock { (success: Bool, err: NSError?) -> Void in
+            if (success) {
+                user?.setObject(avatar, forKey: "avatar")
+                
+                user?.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+                    self.avatarImageView.image = image
+                })
+            }
+        }
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

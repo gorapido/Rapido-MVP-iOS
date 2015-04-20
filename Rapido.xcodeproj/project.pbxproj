@@ -224,6 +224,7 @@
 				TargetAttributes = {
 					FA78AA4C1AD89081006FED5F = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = WUJ99XZ7J2;
 					};
 					FA78AA631AD89081006FED5F = {
 						CreatedOnToolsVersion = 6.2;
@@ -443,9 +444,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
 				INFOPLIST_FILE = Rapido/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ec32d88f-66bc-4900-b81d-3001fbbcc781";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rapido/Rapido-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -457,9 +462,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
 				INFOPLIST_FILE = Rapido/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ec32d88f-66bc-4900-b81d-3001fbbcc781";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rapido/Rapido-Bridging-Header.h";
 			};
 			name = Release;
