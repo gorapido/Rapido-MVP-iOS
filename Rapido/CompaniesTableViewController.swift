@@ -10,32 +10,10 @@ import UIKit
 
 class CompaniesTableViewController: UITableViewController {
     
-    let companies = [
-        [
-            "name": "Comfort Zone",
-            "distance": "1.1 miles",
-            "rating": 5
-        ],
-        [
-            "name": "Del Aire",
-            "distance": "2.0 miles",
-            "rating": 5
-        ],
-        [
-            "name": "Westbrook",
-            "distance": "3.6 miles",
-            "rating": 5
-        ]
-    ]
+    var companies: [PFObject]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,21 +32,27 @@ class CompaniesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return companies.count
+        return companies!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("company", forIndexPath: indexPath) as! UITableViewCell
 
-        cell.textLabel?.text = companies[indexPath.row]["name"] as? String
-        cell.detailTextLabel?.text = companies[indexPath.row]["distance"] as? String
+        
+        let company = companies?[indexPath.row] as PFObject?
+        
+        cell.textLabel?.text = company?.valueForKey("name") as? String
+        //cell.detailTextLabel?.text = companies["distance"] as String
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
 
         return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("companyVCSegue", sender: companies[indexPath.row])
+        let company = companies?[indexPath.row] as PFObject?
+        
+        performSegueWithIdentifier("companyVCSegue", sender: company)
     }
     
     /*
@@ -112,8 +96,9 @@ class CompaniesTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let companyVC = segue.destinationViewController as? CompanyViewController {
-            companyVC.name = "wat"
-            companyVC.summary = "wat"
+            let company = sender as! PFObject;
+            
+            companyVC.company = company
         }
     }
     

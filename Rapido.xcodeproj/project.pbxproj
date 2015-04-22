@@ -22,6 +22,7 @@
 		FA8831CB1ADAD5E3007A3268 /* Rapido-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8831CA1ADAD5E3007A3268 /* Rapido-Bridging-Header.m */; };
 		FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B051ADC27920097F89A /* HireTableViewController.swift */; };
 		FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */; };
+		FAAC24691AE7378300D4874E /* JobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAC24681AE7378300D4874E /* JobViewController.swift */; };
 		FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		FA8831CA1ADAD5E3007A3268 /* Rapido-Bridging-Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Rapido-Bridging-Header.m"; sourceTree = "<group>"; };
 		FA9B8B051ADC27920097F89A /* HireTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireTableViewController.swift; sourceTree = "<group>"; };
 		FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesTableViewController.swift; sourceTree = "<group>"; };
+		FAAC24681AE7378300D4874E /* JobViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobViewController.swift; sourceTree = "<group>"; };
 		FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 				FA2B1A041AE02A6E00150AD6 /* EmailTableViewController.swift */,
 				FA2B1A061AE03C8D00150AD6 /* PasswordTableViewController.swift */,
 				FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */,
+				FAAC24681AE7378300D4874E /* JobViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				FA2B1A071AE03C8D00150AD6 /* PasswordTableViewController.swift in Sources */,
 				FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */,
 				FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */,
+				FAAC24691AE7378300D4874E /* JobViewController.swift in Sources */,
 				FA8831CB1ADAD5E3007A3268 /* Rapido-Bridging-Header.m in Sources */,
 				FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */,
 				FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */,

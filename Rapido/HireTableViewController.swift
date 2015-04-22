@@ -61,7 +61,19 @@ class HireTableViewController: UITableViewController, SessionNVCDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("companiesTVCSegue", sender: nil)
+        var query = PFQuery(className: "Company")
+        var category = categories[indexPath.row]
+        var companies: [PFObject]?
+        
+        query.whereKey("category", equalTo: category)
+        query.findObjectsInBackgroundWithBlock { (collection: [AnyObject]?, err: NSError?) -> Void in
+            companies = collection as? [PFObject]
+            
+            self.performSegueWithIdentifier("companiesTVCSegue", sender: companies)
+        }
+
+        
+        
     }
     
     func signedInSuccessfully() {
@@ -110,6 +122,10 @@ class HireTableViewController: UITableViewController, SessionNVCDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        let companiesTVC = segue.destinationViewController as! CompaniesTableViewController
+        let companies = sender as! [PFObject]
+        
+        companiesTVC.companies = companies
     }
 
 

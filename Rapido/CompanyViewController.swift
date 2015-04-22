@@ -10,8 +10,7 @@ import UIKit
 
 class CompanyViewController: UIViewController {
     
-    var name: String?
-    var summary: String?
+    var company: PFObject?
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -20,8 +19,18 @@ class CompanyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameLabel.text = name
-        summaryTextView.text = summary
+        nameLabel.text = company?.valueForKey("name") as? String
+        summaryTextView.text = company?.valueForKey("summary") as? String
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let logo = company?.valueForKey("logo") as? PFFile;
+        
+        logo!.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
+            let image = UIImage(data: data!)
+            
+            self.logoImageView.image = image
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +39,8 @@ class CompanyViewController: UIViewController {
     }
     
     @IBAction func hireTapped(sender: AnyObject) {
-        
+        tabBarController?.selectedIndex = 1
+        navigationController?.popToRootViewControllerAnimated(true)
     }
 
     /*
