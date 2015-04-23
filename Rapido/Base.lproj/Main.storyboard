@@ -163,21 +163,73 @@
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController title="Job" id="8rJ-Kc-sve" customClass="JobViewController" customModule="Rapido" customModuleProvider="target" sceneMemberID="viewController">
-                    <containerView key="view" opaque="NO" contentMode="scaleToFill" id="u0j-iz-zT7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <connections>
-                            <segue destination="Zma-8a-SwV" kind="embed" id="Jnl-5c-0Ev"/>
-                        </connections>
-                    </containerView>
-                    <tabBarItem key="tabBarItem" title="Job" id="cPa-gy-q4n"/>
-                    <connections>
-                        <outlet property="containerView" destination="u0j-iz-zT7" id="GLg-4B-pIH"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="F0j-DK-MgL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="753" y="-947"/>
+            <point key="canvasLocation" x="1537" y="-843"/>
+        </scene>
+        <!--Pending-->
+        <scene sceneID="Nea-SL-bE7">
+            <objects>
+                <viewController storyboardIdentifier="pendingVC" title="Pending" id="FkY-7z-Pyh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tWW-QK-ewn"/>
+                        <viewControllerLayoutGuide type="bottom" id="m1Y-bs-J4z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FED-np-MBS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find nearest service provider..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N17-QQ-uAR">
+                                <rect key="frame" x="16" y="289" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N17-QQ-uAR" firstAttribute="trailing" secondItem="FED-np-MBS" secondAttribute="trailingMargin" id="1SX-ID-UDb"/>
+                            <constraint firstItem="N17-QQ-uAR" firstAttribute="top" secondItem="tWW-QK-ewn" secondAttribute="bottom" constant="269" id="EBE-Ke-fnc"/>
+                            <constraint firstItem="N17-QQ-uAR" firstAttribute="leading" secondItem="FED-np-MBS" secondAttribute="leadingMargin" id="aUf-bW-ts6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfs-Of-gb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3065" y="-843"/>
+        </scene>
+        <!--Empty-->
+        <scene sceneID="gxJ-O0-Vvx">
+            <objects>
+                <viewController storyboardIdentifier="emptyVC" title="Empty" id="LNX-L8-yGD" customClass="EmptyViewController" customModule="Rapido" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kbr-ea-a4f"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ah7-qN-IZN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y6w-lO-pZI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to see here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4o-o8-zka">
+                                <rect key="frame" x="16" y="289" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="p4o-o8-zka" firstAttribute="trailing" secondItem="y6w-lO-pZI" secondAttribute="trailingMargin" id="D4W-zQ-tRn"/>
+                            <constraint firstItem="p4o-o8-zka" firstAttribute="leading" secondItem="y6w-lO-pZI" secondAttribute="leadingMargin" id="u7r-tU-otk"/>
+                            <constraint firstItem="p4o-o8-zka" firstAttribute="top" secondItem="Kbr-ea-a4f" secondAttribute="bottom" constant="269" id="yvG-OL-fcF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ifR-kj-opp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2303" y="-843"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -191,7 +243,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="wo4-ln-cKR" kind="relationship" relationship="viewControllers" id="C3J-67-tgK"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="GJx-QN-Z06" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="PXw-a5-KNc" kind="relationship" relationship="viewControllers" id="v7z-wN-A2U"/>
                     </connections>
                 </tabBarController>
@@ -814,6 +866,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Prm-SN-GSU">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="LgI-RL-4ft" kind="relationship" relationship="rootViewController" id="XPK-9C-v6D"/>
                     </connections>
@@ -841,24 +896,24 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="989"/>
         </scene>
-        <!--Empty-->
-        <scene sceneID="kx0-S4-oLJ">
+        <!--Job-->
+        <scene sceneID="cmG-jG-TUb">
             <objects>
-                <viewController title="Empty" automaticallyAdjustsScrollViewInsets="NO" id="Zma-8a-SwV" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MFq-7e-z72"/>
-                        <viewControllerLayoutGuide type="bottom" id="3R1-2P-T4C"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="kAR-yN-Gta">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GJx-QN-Z06" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Job" id="cPa-gy-q4n"/>
                     <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X4Q-b6-nYP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iml-G1-x09">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="6yd-97-1kv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3UB-di-fG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542" y="-947"/>
+            <point key="canvasLocation" x="725" y="-843"/>
         </scene>
     </scenes>
 </document>

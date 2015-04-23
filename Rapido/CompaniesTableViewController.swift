@@ -37,7 +37,6 @@ class CompaniesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("company", forIndexPath: indexPath) as! UITableViewCell
-
         
         let company = companies?[indexPath.row] as PFObject?
         

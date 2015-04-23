@@ -71,9 +71,6 @@ class HireTableViewController: UITableViewController, SessionNVCDelegate {
             
             self.performSegueWithIdentifier("companiesTVCSegue", sender: companies)
         }
-
-        
-        
     }
     
     func signedInSuccessfully() {

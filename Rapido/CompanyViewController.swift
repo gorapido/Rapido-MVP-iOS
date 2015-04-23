@@ -9,48 +9,55 @@
 import UIKit
 
 class CompanyViewController: UIViewController {
+  
+  var company: PFObject?
+  
+  @IBOutlet weak var logoImageView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var summaryTextView: UITextView!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    nameLabel.text = company?.valueForKey("name") as? String
+    summaryTextView.text = company?.valueForKey("summary") as? String
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    let logo = company?.valueForKey("logo") as? PFFile;
     
-    var company: PFObject?
+    logo!.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
+      let image = UIImage(data: data!)
+      
+      self.logoImageView.image = image
+    })
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  @IBAction func hireTapped(sender: AnyObject) {
+    let vcs = tabBarController?.viewControllers as NSArray!
     
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var summaryTextView: UITextView!
+    let nc = vcs.objectAtIndex(1) as! UINavigationController
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        nameLabel.text = company?.valueForKey("name") as? String
-        summaryTextView.text = company?.valueForKey("summary") as? String
-    }
+    let jobVC = nc.viewControllers.first as! JobViewController
     
-    override func viewWillAppear(animated: Bool) {
-        let logo = company?.valueForKey("logo") as? PFFile;
-        
-        logo!.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
-            let image = UIImage(data: data!)
-            
-            self.logoImageView.image = image
-        })
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    jobVC.situation = Situation.Pending
     
-    @IBAction func hireTapped(sender: AnyObject) {
-        tabBarController?.selectedIndex = 1
-        navigationController?.popToRootViewControllerAnimated(true)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    tabBarController?.selectedIndex = 1
+    navigationController?.popToRootViewControllerAnimated(true)
+  }
+  
+  /*
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  // Get the new view controller using segue.destinationViewController.
+  // Pass the selected object to the new view controller.
+  }
+  */
+  
 }

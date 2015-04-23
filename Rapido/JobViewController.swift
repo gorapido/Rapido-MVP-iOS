@@ -9,50 +9,62 @@
 import UIKit
 
 enum Situation {
-    case Empty
-    case Pending
-    case Asking
-    case Customer
-    case Employee
-    case Review
+  case Empty
+  case Pending
+  case Asking
+  case Customer
+  case Employee
+  case Review
 }
 
-class JobViewController: UIViewController {
+protocol JobDelegate {
+  func situationEnded()
+}
+
+class JobViewController: UIViewController, JobDelegate {
+  
+  var destinationVC: UIViewController?
+  var situation = Situation.Empty
+  
+  @IBOutlet var containerView: UIView!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    var situation = Situation.Empty
-
-    @IBOutlet var containerView: UIView!
+    navigationController?.setNavigationBarHidden(true, animated: false)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    switch situation {
+    case .Empty:
+      let emptyVC = storyboard?.instantiateViewControllerWithIdentifier("emptyVC") as! UIViewController
+      
+      navigationController?.pushViewController(emptyVC, animated: false)
+      break
+    case .Pending:
+      let pendingVC = storyboard?.instantiateViewControllerWithIdentifier("pendingVC") as! UIViewController
+      
+      navigationController?.pushViewController(pendingVC, animated: false)
+    default:
+      break
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        switch situation {
-        case .Empty:
-            
-            break
-        default:
-            break
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  func situationEnded() {
+    destinationVC?.navigationController?.popToRootViewControllerAnimated(true)
+  }
+  
+  /*
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  // Get the new view controller using segue.destinationViewController.
+  // Pass the selected object to the new view controller.
+  }
+  */
+  
 }
