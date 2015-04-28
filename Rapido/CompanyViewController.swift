@@ -38,16 +38,13 @@ class CompanyViewController: UIViewController {
   }
   
   @IBAction func hireTapped(sender: AnyObject) {
-    let vcs = tabBarController?.viewControllers as NSArray!
+    let hireVC = navigationController?.viewControllers.first as! HireTableViewController
     
-    let nc = vcs.objectAtIndex(1) as! UINavigationController
+    hireVC.situation = Situation.Pending
     
-    let jobVC = nc.viewControllers.first as! JobViewController
-    
-    jobVC.situation = Situation.Pending
-    
-    tabBarController?.selectedIndex = 1
-    navigationController?.popToRootViewControllerAnimated(true)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+    navigationController?.popToRootViewControllerAnimated(false)
+    NSNotificationCenter.defaultCenter().postNotificationName("jobSituation", object: nil)
   }
   
   /*
