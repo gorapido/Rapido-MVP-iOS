@@ -14,6 +14,7 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var emailLabel: UILabel!
+  @IBOutlet weak var availableSwitch: UISwitch!
   
   let manager = CLLocationManager()
   
@@ -30,14 +31,25 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
           if CLLocationManager.authorizationStatus() == .NotDetermined {
             self.manager.requestAlwaysAuthorization()
           }
+          
+          self.availableSwitch.on = employee["available"] as! Bool
         }
         else {
           self.manager.requestWhenInUseAuthorization()
+          
+          let indexPath = NSIndexPath(forRow: 3, inSection: 1)
+          
+          let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
+          
+          tableViewCell?.hidden = true
         }
         
         self.manager.delegate = self
         self.manager.startUpdatingLocation()
       })
+      
+      
+      self.availableSwitch.addTarget(self, action: Selector("availableSwitchChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
   }
   
@@ -116,6 +128,24 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
     }
   }
   
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    var height: CGFloat = 44
+    
+    if indexPath.section == 1 && indexPath.row == 3 {
+      let user = PFUser.currentUser()
+      
+      let q = PFQuery(className: "Employee")
+     
+      q.findObjectsInBackgroundWithBlock({ (employees: [AnyObject]?, err: NSError?) -> Void in
+        if let employee = employees?.first as? PFObject {
+          height = 0
+        }
+      })
+    }
+    
+    return height
+  }
+  
   func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
     let picker = UIImagePickerController()
     
@@ -186,6 +216,29 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
           employee.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
             
           })
+        })
+      }
+    }
+  }
+  
+  func availableSwitchChanged(switchState: UISwitch) {
+    let user = PFUser.currentUser()
+    
+    let q = PFQuery(className: "Employee")
+    
+    q.whereKey("user", equalTo: user!)
+    
+    q.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, error: NSError?) -> Void in
+      if let employee = employees?.first as? PFObject {
+        if self.availableSwitch.on {
+          employee["available"] = true
+        }
+        else {
+          employee["available"] = false
+        }
+        
+        employee.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+          
         })
       }
     }

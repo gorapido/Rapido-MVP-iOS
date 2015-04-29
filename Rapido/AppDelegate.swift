@@ -74,5 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
   }
   
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    
+    completionHandler(UIBackgroundFetchResult.NewData)
+  }
+  
 }
 

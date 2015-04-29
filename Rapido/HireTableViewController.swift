@@ -49,10 +49,33 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
         self.job = job
         
         self.situation = Situation.Pending
-      
-        self.activateSituation()
       }
     }
+    
+    let q2 = PFQuery(className: "Employee")
+    
+    q2.whereKey("user", equalTo: user!)
+    
+    q2.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, err: NSError?) -> Void in
+      if let employee = employees?.first as? PFObject {
+        let q = PFQuery(className:  "Job")
+        
+        q.whereKey("company", equalTo: employee["company"]!)
+        q.whereKeyDoesNotExist("employee")
+        
+        q.findObjectsInBackgroundWithBlock({ (jobs: [AnyObject]?, err: NSError?) -> Void in
+          if let job = jobs?.first as? PFObject {
+            self.job = job
+            
+            self.situation = Situation.Asking
+          
+            self.activateSituation()
+          }
+        })
+      }
+    }
+    
+    activateSituation()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -133,7 +156,17 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       
       presentationVC = destinationVC
       
-      navigationController?.presentViewController(presentationVC!, animated: true, completion: nil)
+      presentViewController(presentationVC!, animated: false, completion: nil)
+      break
+    case .Asking:
+      let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("askVC") as! AskViewController
+      
+      destinationVC.delegate = self
+      destinationVC.job = job
+      
+      presentationVC = destinationVC
+      
+      presentViewController(presentationVC!, animated: false, completion: nil)
       break
     default:
       break
