@@ -72,6 +72,21 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
             self.activateSituation()
           }
         })
+        
+        let q3 = PFQuery(className: "Job")
+        
+        q3.whereKey("employee", equalTo: employee)
+        q3.whereKeyDoesNotExist("finish")
+        
+        q3.findObjectsInBackgroundWithBlock({ (jobs: [AnyObject]?, err: NSError?) -> Void in
+          if let job = jobs?.first as? PFObject {
+            self.job = job
+            
+            self.situation = Situation.Customer
+            
+            self.activateSituation()
+          }
+        })
       }
     }
     
@@ -156,7 +171,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       
       presentationVC = destinationVC
       
-      presentViewController(presentationVC!, animated: false, completion: nil)
+      presentViewController(presentationVC!, animated: true, completion: nil)
       break
     case .Asking:
       let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("askVC") as! AskViewController
@@ -166,7 +181,17 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       
       presentationVC = destinationVC
       
-      presentViewController(presentationVC!, animated: false, completion: nil)
+      presentViewController(presentationVC!, animated: true, completion: nil)
+      break
+    case .Customer:
+      let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("customerVC") as! CustomerViewController
+      
+      destinationVC.delegate = self
+      destinationVC.job = job
+      
+      presentationVC = destinationVC
+      
+      presentViewController(presentationVC!, animated: true, completion: nil)
       break
     default:
       break

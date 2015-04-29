@@ -304,8 +304,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-dG-fF4">
                                 <rect key="frame" x="218" y="110" width="164" height="164"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="164" id="YGA-OG-3VL"/>
-                                    <constraint firstAttribute="width" constant="164" id="yho-IT-e8f"/>
+                                    <constraint firstAttribute="height" constant="164" id="8tV-Ha-eZh"/>
+                                    <constraint firstAttribute="width" constant="164" id="HFg-ma-Du4"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pW-j6-XBD">
@@ -314,26 +314,29 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="E2a-ZG-6KK">
-                                <rect key="frame" x="16" y="318" width="568" height="262"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2a-ZG-6KK">
+                                <rect key="frame" x="0.0" y="318" width="600" height="262"/>
+                                <connections>
+                                    <outlet property="delegate" destination="r3F-lg-iGL" id="QqA-Wb-QFP"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="leading" secondItem="lii-Jd-4Q8" secondAttribute="leadingMargin" id="JqR-Tf-QjQ"/>
-                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="top" secondItem="6pW-j6-XBD" secondAttribute="bottom" constant="8" symbolic="YES" id="OvA-2p-7yZ"/>
-                            <constraint firstItem="XT3-dG-fF4" firstAttribute="centerX" secondItem="6pW-j6-XBD" secondAttribute="centerX" id="Qyc-Zi-XV8"/>
-                            <constraint firstItem="6pW-j6-XBD" firstAttribute="leading" secondItem="E2a-ZG-6KK" secondAttribute="leading" id="Rpq-bV-WrI"/>
-                            <constraint firstItem="6pW-j6-XBD" firstAttribute="top" secondItem="XT3-dG-fF4" secondAttribute="bottom" constant="15" id="U8G-MW-p5A"/>
-                            <constraint firstAttribute="bottom" secondItem="E2a-ZG-6KK" secondAttribute="bottom" constant="20" symbolic="YES" id="Vmy-2Z-TnT"/>
-                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="trailing" secondItem="6pW-j6-XBD" secondAttribute="trailing" id="ipF-3L-qzC"/>
-                            <constraint firstItem="XT3-dG-fF4" firstAttribute="top" secondItem="NQh-Sw-pcU" secondAttribute="bottom" constant="90" id="nLk-mg-eqv"/>
-                            <constraint firstItem="6pW-j6-XBD" firstAttribute="trailing" secondItem="lii-Jd-4Q8" secondAttribute="trailingMargin" id="wpF-fX-RPS"/>
+                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="top" secondItem="6pW-j6-XBD" secondAttribute="bottom" constant="8" symbolic="YES" id="EZG-z6-KTq"/>
+                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="centerX" secondItem="6pW-j6-XBD" secondAttribute="centerX" id="MXR-06-blk"/>
+                            <constraint firstItem="6pW-j6-XBD" firstAttribute="top" secondItem="XT3-dG-fF4" secondAttribute="bottom" constant="15" id="Pgz-Oq-1SO"/>
+                            <constraint firstAttribute="bottom" secondItem="E2a-ZG-6KK" secondAttribute="bottom" constant="20" symbolic="YES" id="Xzy-su-q3N"/>
+                            <constraint firstItem="E2a-ZG-6KK" firstAttribute="leading" secondItem="lii-Jd-4Q8" secondAttribute="leading" id="bao-ni-S4H"/>
+                            <constraint firstAttribute="trailing" secondItem="E2a-ZG-6KK" secondAttribute="trailing" id="g98-CY-Az4"/>
+                            <constraint firstItem="XT3-dG-fF4" firstAttribute="top" secondItem="NQh-Sw-pcU" secondAttribute="bottom" constant="90" id="hXb-4n-S7v"/>
+                            <constraint firstItem="6pW-j6-XBD" firstAttribute="leading" secondItem="lii-Jd-4Q8" secondAttribute="leadingMargin" id="pbx-Zk-mLj"/>
+                            <constraint firstItem="XT3-dG-fF4" firstAttribute="centerX" secondItem="6pW-j6-XBD" secondAttribute="centerX" id="uZx-0P-Ipu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="XT3-dG-fF4" id="xv9-hk-AAV"/>
-                        <outlet property="locationMapView" destination="E2a-ZG-6KK" id="lvd-rG-OVA"/>
+                        <outlet property="mapView" destination="E2a-ZG-6KK" id="1pL-Lk-ers"/>
                         <outlet property="nameLabel" destination="6pW-j6-XBD" id="dML-6k-xNQ"/>
                     </connections>
                 </viewController>

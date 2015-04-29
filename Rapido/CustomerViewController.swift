@@ -9,11 +9,11 @@
 import UIKit
 import MapKit
 
-class CustomerViewController: UIViewController {
+class CustomerViewController: UIViewController, MKMapViewDelegate {
   
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet var locationMapView: MKMapView!
+  @IBOutlet weak var mapView: MKMapView!
   
   var delegate: PresentaionDelegate?
   var job: PFObject?
@@ -46,8 +46,51 @@ class CustomerViewController: UIViewController {
     
       let region = MKCoordinateRegion(center: location, span: span)
     
-      locationMapView.setRegion(region, animated: true)
+      mapView.setRegion(region, animated: true)
+      
+      let annotation = MKPointAnnotation()
+      
+      annotation.coordinate = location
+      annotation.title = "\(firstName)'s location"
+      //annotation.subtitle = "1.1 m"
+      
+      mapView.addAnnotation(annotation)
+      
+      mapView.selectAnnotation(annotation, animated: true)
     }
+  }
+  
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "navAV")
+    
+    annotationView.canShowCallout = true
+    
+    let navigateButton = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+    
+    annotationView.leftCalloutAccessoryView = navigateButton
+    
+    return annotationView
+  }
+  
+  func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+    let geoPoint = job!["coordinates"] as! PFGeoPoint
+    
+    let location = CLLocationCoordinate2D(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
+  
+    let span = MKCoordinateSpanMake(0.05, 0.05)
+    
+    let region = MKCoordinateRegion(center: location, span: span)
+    
+    let options = [
+      MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: region.center),
+      MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: region.span)
+    ]
+    
+    let placemark = MKPlacemark(coordinate: location, addressDictionary: nil)
+    
+    let mapItem = MKMapItem(placemark: placemark)
+    
+    mapItem.openInMapsWithLaunchOptions(options)
   }
   
   override func didReceiveMemoryWarning() {

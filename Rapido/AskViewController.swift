@@ -42,13 +42,6 @@ class AskViewController: UIViewController {
   }
   
   @IBAction func acceptTouchUpInside(sender: AnyObject) {
-    let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("customerVC") as! CustomerViewController
-    
-    destinationVC.delegate = self.delegate
-    destinationVC.job = self.job
-    
-    self.presentViewController(destinationVC, animated: true, completion: nil)
-    /*
     let user = PFUser.currentUser()
     
     let q = PFQuery(className: "Employee")
@@ -69,7 +62,6 @@ class AskViewController: UIViewController {
         self.presentViewController(destinationVC, animated: true, completion: nil)
       })
     }
-    */
   }
   
   @IBAction func denyTouchUpInside(sender: AnyObject) {
