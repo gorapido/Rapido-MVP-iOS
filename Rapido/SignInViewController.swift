@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var passwd: UITextField!
     
-    var delegate: SessionNVCDelegate?
+    var delegate: SessionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class SignInViewController: UIViewController {
     @IBAction func signInTapped(sender: AnyObject) {
         PFUser.logInWithUsernameInBackground(email.text, password: passwd.text) { (user: PFUser?, err: NSError?) -> Void in
             if user != nil {
-                self.delegate?.signedInSuccessfully()
+                self.delegate?.signInSuccessfully()
             } else {
                 
             }

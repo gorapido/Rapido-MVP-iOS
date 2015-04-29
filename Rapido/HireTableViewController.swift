@@ -17,21 +17,42 @@ enum Situation {
   case Review
 }
 
-protocol SessionNVCDelegate {
-  func signedInSuccessfully()
+protocol SessionDelegate {
+  func signInSuccessfully()
 }
 
-class HireTableViewController: UITableViewController, SessionNVCDelegate {
+protocol PresentaionDelegate {
+  func presentationDidFinish(situation: Situation)
+}
+
+class HireTableViewController: UITableViewController, SessionDelegate, PresentaionDelegate {
   
   let categories = ["HVAC", "Plumbing", "Electricity", "Other"]
+  
   var situation = Situation.Empty
   var sessionNVC: UINavigationController?
+  var presentationVC: UIViewController?
+  var job: PFObject?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "activateSituation", name: "jobSituation", object: nil);
-    activateSituation()
+    let user = PFUser.currentUser()
+    
+    let query = PFQuery(className: "Job")
+    
+    query.whereKey("consumer", equalTo: user!)
+    query.whereKeyDoesNotExist("finish")
+    
+    query.findObjectsInBackgroundWithBlock { (jobs: [AnyObject]?, err: NSError?) -> Void in
+      if let job = jobs?.first as? PFObject {
+        self.job = job
+        
+        self.situation = Situation.Pending
+      
+        self.activateSituation()
+      }
+    }
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -40,16 +61,14 @@ class HireTableViewController: UITableViewController, SessionNVCDelegate {
     if user == nil {
       sessionNVC = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
       
-      var signInVC = sessionNVC?.viewControllers.first as! SignInViewController
+      let signInVC = sessionNVC?.viewControllers.first as! SignInViewController
       
       signInVC.delegate = self
       
       presentViewController(sessionNVC!, animated: true, completion: nil)
     }
     else {
-      if situation != .Empty {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-      }
+      activateSituation()
     }
   }
   
@@ -91,29 +110,34 @@ class HireTableViewController: UITableViewController, SessionNVCDelegate {
     }
   }
   
-  func signedInSuccessfully() {
+  func signInSuccessfully() {
     sessionNVC?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func presentationDidFinish(situation: Situation) {
+    self.situation = situation
+    
+    presentationVC?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func activateSituation()
   {
     navigationController?.popToRootViewControllerAnimated(false)
+    
     switch situation {
-    case .Empty:
-      navigationController?.setNavigationBarHidden(false, animated: false)
-      break
     case .Pending:
-      activateViewControllerWithIdentifier("pendingVC")
+      let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("pendingVC") as! PendingViewController
+      
+      destinationVC.delegate = self
+      destinationVC.job = job
+      
+      presentationVC = destinationVC
+      
+      navigationController?.presentViewController(presentationVC!, animated: true, completion: nil)
       break
     default:
       break
     }
-  }
-  
-  func activateViewControllerWithIdentifier(identifier: String) {
-    let destinationVC = storyboard?.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
-    
-    navigationController?.pushViewController(destinationVC, animated: false)
   }
   
   /*

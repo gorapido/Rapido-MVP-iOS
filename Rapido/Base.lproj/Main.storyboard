@@ -107,7 +107,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcq-1u-lGV">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcq-1u-lGV">
                                 <rect key="frame" x="22" y="318" width="562" height="161"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -127,7 +127,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="hireTapped:" destination="8Qk-qA-59a" eventType="touchUpInside" id="e2q-hp-ME7"/>
+                                    <action selector="hireTouchUpInside:" destination="8Qk-qA-59a" eventType="touchUpInside" id="vQS-lO-cze"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Wk-vi-chd">
@@ -230,7 +230,7 @@
         <scene sceneID="Nea-SL-bE7">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfs-Of-gb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="pendingVC" title="Pending" id="FkY-7z-Pyh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pendingVC" title="Pending" id="FkY-7z-Pyh" customClass="PendingViewController" customModule="Rapido" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tWW-QK-ewn"/>
                         <viewControllerLayoutGuide type="bottom" id="m1Y-bs-J4z"/>
@@ -245,12 +245,28 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qm-UX-l0F">
+                                <rect key="frame" x="0.0" y="536" width="600" height="64"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="z4a-am-oFH"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTouchUpInside:" destination="FkY-7z-Pyh" eventType="touchUpInside" id="Na3-eL-YMV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="N17-QQ-uAR" firstAttribute="trailing" secondItem="FED-np-MBS" secondAttribute="trailingMargin" id="1SX-ID-UDb"/>
+                            <constraint firstItem="8qm-UX-l0F" firstAttribute="bottom" secondItem="m1Y-bs-J4z" secondAttribute="top" id="B4K-5g-hAB"/>
                             <constraint firstItem="N17-QQ-uAR" firstAttribute="top" secondItem="tWW-QK-ewn" secondAttribute="bottom" constant="269" id="EBE-Ke-fnc"/>
+                            <constraint firstItem="8qm-UX-l0F" firstAttribute="centerX" secondItem="N17-QQ-uAR" secondAttribute="centerX" id="GvC-Uj-Cmc"/>
                             <constraint firstItem="N17-QQ-uAR" firstAttribute="leading" secondItem="FED-np-MBS" secondAttribute="leadingMargin" id="aUf-bW-ts6"/>
+                            <constraint firstItem="8qm-UX-l0F" firstAttribute="leading" secondItem="FED-np-MBS" secondAttribute="leading" id="qy7-Vs-DwS"/>
                         </constraints>
                     </view>
                 </viewController>

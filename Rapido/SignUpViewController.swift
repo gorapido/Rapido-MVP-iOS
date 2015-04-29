@@ -10,7 +10,7 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
-    var delegate: SessionNVCDelegate?
+    var delegate: SessionDelegate?
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController {
         
         user.signUpInBackgroundWithBlock() { (success: Bool, err: NSError?) -> Void in
             if success {
-                self.delegate?.signedInSuccessfully()
+                self.delegate?.signInSuccessfully()
             }
             else {
                 

@@ -37,14 +37,25 @@ class CompanyViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  @IBAction func hireTapped(sender: AnyObject) {
-    let hireVC = navigationController?.viewControllers.first as! HireTableViewController
-    
-    hireVC.situation = Situation.Pending
-    
-    navigationController?.setNavigationBarHidden(true, animated: false)
-    navigationController?.popToRootViewControllerAnimated(false)
-    NSNotificationCenter.defaultCenter().postNotificationName("jobSituation", object: nil)
+  @IBAction func hireTouchUpInside(sender: AnyObject) {
+    PFGeoPoint.geoPointForCurrentLocationInBackground() { (coordinates: PFGeoPoint?, err: NSError?) -> Void in
+      let job = PFObject(className: "Job")
+      
+      let user = PFUser.currentUser()
+      
+      job["consumer"] = user
+      job["company"] = self.company
+      job["coordinates"] = coordinates
+      
+      job.saveInBackgroundWithBlock({ (succress: Bool, err: NSError?) -> Void in
+        let hireVC = self.navigationController?.viewControllers.first as! HireTableViewController
+        
+        hireVC.situation = Situation.Pending
+        hireVC.job = job
+        
+        self.navigationController?.popToRootViewControllerAnimated(false)
+      })
+    }
   }
   
   /*

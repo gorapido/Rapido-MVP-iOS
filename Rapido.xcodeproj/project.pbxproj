@@ -19,9 +19,9 @@
 		FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA6A1AD89081006FED5F /* RapidoTests.swift */; };
 		FA8831C61ADABD11007A3268 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */; };
 		FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8831C71ADABD1D007A3268 /* SignInViewController.swift */; };
-		FA8831CB1ADAD5E3007A3268 /* Rapido-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8831CA1ADAD5E3007A3268 /* Rapido-Bridging-Header.m */; };
 		FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B051ADC27920097F89A /* HireTableViewController.swift */; };
 		FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */; };
+		FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8304B1AEFE6900005053F /* PendingViewController.swift */; };
 		FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +55,9 @@
 		FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		FA8831C71ADABD1D007A3268 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FA8831C91ADAD5E2007A3268 /* Rapido-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rapido-Bridging-Header.h"; sourceTree = "<group>"; };
-		FA8831CA1ADAD5E3007A3268 /* Rapido-Bridging-Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Rapido-Bridging-Header.m"; sourceTree = "<group>"; };
 		FA9B8B051ADC27920097F89A /* HireTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireTableViewController.swift; sourceTree = "<group>"; };
 		FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesTableViewController.swift; sourceTree = "<group>"; };
+		FAB8304B1AEFE6900005053F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +126,6 @@
 				FA78AA5B1AD89081006FED5F /* Images.xcassets */,
 				FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */,
 				FA78AA501AD89081006FED5F /* Supporting Files */,
-				FA8831CA1ADAD5E3007A3268 /* Rapido-Bridging-Header.m */,
 				FA8831C91ADAD5E2007A3268 /* Rapido-Bridging-Header.h */,
 			);
 			path = Rapido;
@@ -169,6 +168,7 @@
 				FA2B1A041AE02A6E00150AD6 /* EmailTableViewController.swift */,
 				FA2B1A061AE03C8D00150AD6 /* PasswordTableViewController.swift */,
 				FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */,
+				FAB8304B1AEFE6900005053F /* PendingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -313,11 +313,11 @@
 				FA2B1A031AE0276A00150AD6 /* NameTableViewController.swift in Sources */,
 				FA2B1A051AE02A6E00150AD6 /* EmailTableViewController.swift in Sources */,
 				FA8831C61ADABD11007A3268 /* ProfileTableViewController.swift in Sources */,
+				FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */,
 				FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */,
 				FA2B1A071AE03C8D00150AD6 /* PasswordTableViewController.swift in Sources */,
 				FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */,
 				FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */,
-				FA8831CB1ADAD5E3007A3268 /* Rapido-Bridging-Header.m in Sources */,
 				FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */,
 				FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */,
 			);
