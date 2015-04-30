@@ -163,15 +163,15 @@
 		FA8831C41ADABBC1007A3268 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */,
 				FA8831C71ADABD1D007A3268 /* SignInViewController.swift */,
+				FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */,
+				FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */,
+				FA2B1A041AE02A6E00150AD6 /* EmailTableViewController.swift */,
+				FA2B1A061AE03C8D00150AD6 /* PasswordTableViewController.swift */,
+				FA2B1A021AE0276A00150AD6 /* NameTableViewController.swift */,
 				FA9B8B051ADC27920097F89A /* HireTableViewController.swift */,
 				FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */,
 				FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */,
-				FA2B1A021AE0276A00150AD6 /* NameTableViewController.swift */,
-				FA2B1A041AE02A6E00150AD6 /* EmailTableViewController.swift */,
-				FA2B1A061AE03C8D00150AD6 /* PasswordTableViewController.swift */,
-				FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */,
 				FAB8304B1AEFE6900005053F /* PendingViewController.swift */,
 				FA31DC0E1AF122F90038743F /* AskViewController.swift */,
 				FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */,

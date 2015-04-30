@@ -37,11 +37,11 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let user = PFUser.currentUser()
+    if let user = PFUser.currentUser() {
     
     let query = PFQuery(className: "Job")
     
-    query.whereKey("consumer", equalTo: user!)
+    query.whereKey("consumer", equalTo: user)
     query.whereKeyDoesNotExist("finish")
     
     query.findObjectsInBackgroundWithBlock { (jobs: [AnyObject]?, err: NSError?) -> Void in
@@ -54,7 +54,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     
     let q2 = PFQuery(className: "Employee")
     
-    q2.whereKey("user", equalTo: user!)
+    q2.whereKey("user", equalTo: user)
     
     q2.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, err: NSError?) -> Void in
       if let employee = employees?.first as? PFObject {
@@ -91,6 +91,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     }
     
     activateSituation()
+    }
   }
   
   override func viewWillAppear(animated: Bool) {

@@ -98,6 +98,14 @@ class CustomerViewController: UIViewController, MKMapViewDelegate {
     // Dispose of any resources that can be recreated.
   }
   
+  @IBAction func closeTouchUpInside(sender: AnyObject) {
+    job!["finish"] = NSDate()
+    
+    job?.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+      self.delegate?.presentationDidFinish(.Empty)
+    })
+  }
+  
   /*
   // MARK: - Navigation
   
