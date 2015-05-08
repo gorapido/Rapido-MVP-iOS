@@ -19,6 +19,8 @@ class AskViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
+    
     if let consumer = job!["consumer"] as? PFUser {
       consumer.fetchIfNeeded()
       
@@ -70,6 +72,10 @@ class AskViewController: UIViewController {
     job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
       self.delegate?.presentationDidFinish(.Empty)
     })
+  }
+  
+  func notificationReceived() {
+    delegate?.presentationDidFinish(.Empty)
   }
 
   /*
