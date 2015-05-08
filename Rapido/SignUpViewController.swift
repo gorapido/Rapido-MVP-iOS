@@ -17,9 +17,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   
   var delegate: SessionDelegate?
   var kbHeight: CGFloat?
+  var kbDown: Bool = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    firstNameTextField.autocapitalizationType = UITextAutocapitalizationType.Words
+    lastNameTextField.autocapitalizationType = UITextAutocapitalizationType.Words
     
     passwordTextField.secureTextEntry = true
     
@@ -48,7 +52,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   }
   
   @IBAction func signUpTouchUpInside(sender: AnyObject) {
-    var user = PFUser()
+    let user = PFUser()
     
     user.username = emailTextField.text
     user.email = emailTextField.text
@@ -75,18 +79,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   func keyboardWillShow(notification: NSNotification) {
     if let userInfo = notification.userInfo {
       if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-        kbHeight = keyboardSize.height
-        self.animateTextField(true)
+        if kbDown {
+          kbDown = false
+          kbHeight = keyboardSize.height
+          
+          animateTextField(true)
+        }
       }
     }
   }
   
   func keyboardWillHide(notification: NSNotification) {
-    self.animateTextField(false)
+    kbDown = true
+    
+    animateTextField(false)
   }
   
   func animateTextField(up: Bool) {
-    var movement = (up ? -kbHeight! : kbHeight)
+    let movement = (up ? -kbHeight! : kbHeight)
     
     UIView.animateWithDuration(0.3, animations: {
       self.view.frame = CGRectOffset(self.view.frame, 0, movement!)

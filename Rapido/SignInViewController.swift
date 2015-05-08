@@ -16,6 +16,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   
   var delegate: SessionDelegate?
   var kbHeight: CGFloat?
+  var prevKbHeight: CGFloat = 0.0
+  var kbDown: Bool = true
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,24 +64,30 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     
-    return false
+    return true
   }
   
   func keyboardWillShow(notification: NSNotification) {
     if let userInfo = notification.userInfo {
-      if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-        kbHeight = keyboardSize.height
-        self.animateTextField(true)
+      if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if kbDown {
+          kbDown = false
+          kbHeight = keyboardSize.height
+            
+          animateTextField(true)
+        }
       }
     }
   }
   
   func keyboardWillHide(notification: NSNotification) {
-    self.animateTextField(false)
+    kbDown = true
+    
+    animateTextField(false)
   }
   
   func animateTextField(up: Bool) {
-    var movement = (up ? -kbHeight! : kbHeight)
+    var movement = up ? -kbHeight! : kbHeight
     
     UIView.animateWithDuration(0.3, animations: {
       self.view.frame = CGRectOffset(self.view.frame, 0, movement!)

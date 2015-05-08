@@ -1042,7 +1042,7 @@
         <!--Employee-->
         <scene sceneID="Yo9-FN-Lj5">
             <objects>
-                <viewController storyboardIdentifier="employeeVC" title="Employee" id="g3d-J8-0aH" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="employeeVC" title="Employee" id="g3d-J8-0aH" customClass="EmployeeViewController" customModule="Rapido" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5HX-5T-cfp"/>
                         <viewControllerLayoutGuide type="bottom" id="XFF-Km-gL7"/>
@@ -1051,10 +1051,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tLz-tz-ah4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tLz-tz-ah4">
                                 <rect key="frame" x="218" y="110" width="164" height="164"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="164" id="iyo-6U-Z88"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvZ-V3-J1T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvZ-V3-J1T">
                                 <rect key="frame" x="16" y="289" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1062,7 +1065,19 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pvZ-V3-J1T" firstAttribute="trailing" secondItem="V0A-v1-CPb" secondAttribute="trailingMargin" id="Ald-Jm-Ljv"/>
+                            <constraint firstItem="pvZ-V3-J1T" firstAttribute="leading" secondItem="V0A-v1-CPb" secondAttribute="leadingMargin" id="F6n-4n-Byx"/>
+                            <constraint firstItem="tLz-tz-ah4" firstAttribute="top" secondItem="5HX-5T-cfp" secondAttribute="bottom" constant="90" id="Ifx-JR-blO"/>
+                            <constraint firstItem="pvZ-V3-J1T" firstAttribute="top" secondItem="tLz-tz-ah4" secondAttribute="bottom" constant="15" id="PQD-yU-Jer"/>
+                            <constraint firstItem="XFF-Km-gL7" firstAttribute="top" secondItem="pvZ-V3-J1T" secondAttribute="bottom" constant="290" id="TYW-SJ-roR"/>
+                            <constraint firstItem="pvZ-V3-J1T" firstAttribute="centerX" secondItem="tLz-tz-ah4" secondAttribute="centerX" id="fIG-IH-7bE"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="tLz-tz-ah4" id="E8S-Wg-NGv"/>
+                        <outlet property="nameLabel" destination="pvZ-V3-J1T" id="g4D-BH-hpx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUv-lH-2fd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

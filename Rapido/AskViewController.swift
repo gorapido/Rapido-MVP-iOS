@@ -52,6 +52,7 @@ class AskViewController: UIViewController {
       let employee = employees?.first as! PFObject
       
       self.job!["employee"] = employee
+      self.job!["start"] = NSDate()
       
       self.job?.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
         let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("customerVC") as! CustomerViewController
@@ -59,6 +60,7 @@ class AskViewController: UIViewController {
         destinationVC.delegate = self.delegate
         destinationVC.job = self.job
     
+        self.delegate?.presentationDidFinish(.Customer)
         self.presentViewController(destinationVC, animated: true, completion: nil)
       })
     }
@@ -66,10 +68,10 @@ class AskViewController: UIViewController {
   
   @IBAction func denyTouchUpInside(sender: AnyObject) {
     job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
-      self.delegate?.presentationDidFinish(Situation.Empty)
+      self.delegate?.presentationDidFinish(.Empty)
     })
   }
-  
+
   /*
   // MARK: - Navigation
   

@@ -12,6 +12,7 @@ enum Situation {
   case Empty
   case Pending
   case Asking
+  case Canceled
   case Customer
   case Employee
   case Review
@@ -37,67 +38,16 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let user = PFUser.currentUser() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
     
-    let query = PFQuery(className: "Job")
-    
-    query.whereKey("consumer", equalTo: user)
-    query.whereKeyDoesNotExist("finish")
-    
-    query.findObjectsInBackgroundWithBlock { (jobs: [AnyObject]?, err: NSError?) -> Void in
-      if let job = jobs?.first as? PFObject {
-        self.job = job
-        
-        self.situation = Situation.Pending
-      }
-    }
-    
-    let q2 = PFQuery(className: "Employee")
-    
-    q2.whereKey("user", equalTo: user)
-    
-    q2.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, err: NSError?) -> Void in
-      if let employee = employees?.first as? PFObject {
-        let q = PFQuery(className:  "Job")
-        
-        q.whereKey("company", equalTo: employee["company"]!)
-        q.whereKeyDoesNotExist("employee")
-        
-        q.findObjectsInBackgroundWithBlock({ (jobs: [AnyObject]?, err: NSError?) -> Void in
-          if let job = jobs?.first as? PFObject {
-            self.job = job
-            
-            self.situation = Situation.Asking
-          
-            self.activateSituation()
-          }
-        })
-        
-        let q3 = PFQuery(className: "Job")
-        
-        q3.whereKey("employee", equalTo: employee)
-        q3.whereKeyDoesNotExist("finish")
-        
-        q3.findObjectsInBackgroundWithBlock({ (jobs: [AnyObject]?, err: NSError?) -> Void in
-          if let job = jobs?.first as? PFObject {
-            self.job = job
-            
-            self.situation = Situation.Customer
-            
-            self.activateSituation()
-          }
-        })
-      }
-    }
-    
-    activateSituation()
-    }
+    determineSituation()
   }
   
   override func viewWillAppear(animated: Bool) {
-    var user = PFUser.currentUser()
-    
-    if user == nil {
+    if let user = PFUser.currentUser() {
+      activateSituation()
+    }
+    else {
       sessionNVC = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
       
       let signInVC = sessionNVC?.viewControllers.first as! SignInViewController
@@ -105,9 +55,6 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       signInVC.delegate = self
       
       presentViewController(sessionNVC!, animated: true, completion: nil)
-    }
-    else {
-      activateSituation()
     }
   }
   
@@ -159,6 +106,70 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     presentationVC?.dismissViewControllerAnimated(true, completion: nil)
   }
   
+  func determineSituation() {
+    if let user = PFUser.currentUser() {
+      let consumerJob = PFQuery(className: "Job")
+      
+      consumerJob.whereKey("consumer", equalTo: user)
+      consumerJob.whereKeyDoesNotExist("finish")
+      
+      consumerJob.getFirstObjectInBackgroundWithBlock { (job: PFObject?, err: NSError?) -> Void in
+        if err === nil {
+          self.job = job
+          
+          if job!["employee"] === nil {
+            self.situation = .Pending
+          }
+          else {
+            self.situation = .Employee
+          }
+          
+          self.activateSituation()
+        }
+      }
+      
+      let employeeJob = PFQuery(className: "Employee")
+      
+      employeeJob.whereKey("user", equalTo: user)
+      
+      employeeJob.getFirstObjectInBackgroundWithBlock { (employee: PFObject?, err: NSError?) -> Void in
+        if err === nil {
+          let unassignedJob = PFQuery(className:  "Job")
+          
+          let company = employee!["company"] as! PFObject
+          
+          unassignedJob.whereKey("company", equalTo: company)
+          unassignedJob.whereKeyDoesNotExist("employee")
+          
+          unassignedJob.getFirstObjectInBackgroundWithBlock { (job: PFObject?, err: NSError?) -> Void in
+            if err === nil {
+              self.job = job
+              
+              self.situation = .Asking
+              
+              self.activateSituation()
+            }
+          }
+          
+          let currentJob = PFQuery(className: "Job")
+          
+          currentJob.whereKey("employee", equalTo: employee!)
+          currentJob.whereKeyDoesNotExist("finish")
+          
+          currentJob.getFirstObjectInBackgroundWithBlock { (job: PFObject?, err: NSError?) -> Void in
+            if err === nil {
+              self.job = job
+              
+              self.situation = .Customer
+              
+              self.activateSituation()
+            }
+          }
+        }
+      }
+    }
+  }
+  
   func activateSituation()
   {
     navigationController?.popToRootViewControllerAnimated(false)
@@ -184,8 +195,23 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       
       presentViewController(presentationVC!, animated: true, completion: nil)
       break
+    case .Canceled:
+      let closingVC = presentationVC as! AskViewController
+      
+      closingVC.delegate?.presentationDidFinish(.Empty)
+      break
     case .Customer:
       let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("customerVC") as! CustomerViewController
+      
+      destinationVC.delegate = self
+      destinationVC.job = job
+      
+      presentationVC = destinationVC
+      
+      presentViewController(presentationVC!, animated: true, completion: nil)
+      break
+    case .Employee:
+      let destinationVC = storyboard?.instantiateViewControllerWithIdentifier("employeeVC") as! EmployeeViewController
       
       destinationVC.delegate = self
       destinationVC.job = job
@@ -197,6 +223,10 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     default:
       break
     }
+  }
+  
+  func notificationReceived() {
+    determineSituation()
   }
   
   /*

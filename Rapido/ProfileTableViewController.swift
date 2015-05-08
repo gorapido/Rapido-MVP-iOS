@@ -22,32 +22,34 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
     super.viewDidLoad()
     
     if let user = PFUser.currentUser() {
-      let q = PFQuery(className: "Employee")
-      
-      q.whereKey("user", equalTo: user)
-      
-      q.findObjectsInBackgroundWithBlock({ (employees: [AnyObject]?, err: NSError?) -> Void in
-        if let employee = employees?.first as? PFObject {
-          if CLLocationManager.authorizationStatus() == .NotDetermined {
-            self.manager.requestAlwaysAuthorization()
+        let q = PFQuery(className: "Employee")
+        
+        q.whereKey("user", equalTo: user)
+        
+        q.getFirstObjectInBackgroundWithBlock { (employee: PFObject?, err: NSError?) -> Void in
+          if err === nil {
+            if CLLocationManager.authorizationStatus() == .NotDetermined {
+              self.manager.requestAlwaysAuthorization()
+            }
+            
+            self.availableSwitch.on = employee!["available"] as! Bool
+          }
+          else {
+            self.manager.requestWhenInUseAuthorization()
+            
+            let indexPath = NSIndexPath(forRow: 3, inSection: 1)
+            
+            let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
+            
+            tableViewCell?.hidden = true
           }
           
-          self.availableSwitch.on = employee["available"] as! Bool
+          self.manager.delegate = self
+          
+          if self.availableSwitch.on {
+            self.manager.startUpdatingLocation()
+          }
         }
-        else {
-          self.manager.requestWhenInUseAuthorization()
-          
-          let indexPath = NSIndexPath(forRow: 3, inSection: 1)
-          
-          let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
-          
-          tableViewCell?.hidden = true
-        }
-        
-        self.manager.delegate = self
-        self.manager.startUpdatingLocation()
-      })
-      
       
       self.availableSwitch.addTarget(self, action: Selector("availableSwitchChanged:"), forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -93,8 +95,9 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default) { action in
-          let passwd = alert.textFields![0] as! UITextField;
-          var user = PFUser.currentUser()!
+          let passwd = alert.textFields![0] as! UITextField
+          
+          let user = PFUser.currentUser()!
           
           PFUser.logInWithUsernameInBackground(user.email!, password: passwd.text) { (user: PFUser?, err: NSError?) -> Void in
             if user != nil {
@@ -108,7 +111,7 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
           
-          })
+        })
         
         presentViewController(alert, animated: true, completion: nil)
       }
@@ -136,11 +139,11 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
       
       let q = PFQuery(className: "Employee")
      
-      q.findObjectsInBackgroundWithBlock({ (employees: [AnyObject]?, err: NSError?) -> Void in
-        if let employee = employees?.first as? PFObject {
+      q.getFirstObjectInBackgroundWithBlock { (employee: PFObject?, err: NSError?) -> Void in
+        if err === nil {
           height = 0
         }
-      })
+      }
     }
     
     return height
@@ -202,21 +205,22 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   }
   
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-    let user = PFUser.currentUser()
+    if let user = PFUser.currentUser() {
     
-    let q = PFQuery(className: "Employee")
+      let q = PFQuery(className: "Employee")
     
-    q.whereKey("user", equalTo: user!)
+      q.whereKey("user", equalTo: user)
     
-    q.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, error: NSError?) -> Void in
-      if let employee = employees?.first as? PFObject {
-        PFGeoPoint.geoPointForCurrentLocationInBackground({ (coordinates: PFGeoPoint?, err: NSError?) -> Void in
-          employee["coordinates"] = coordinates
+      q.getFirstObjectInBackgroundWithBlock { (employee: PFObject?, err: NSError?) -> Void in
+        if err === nil {
+          PFGeoPoint.geoPointForCurrentLocationInBackground { (coordinates: PFGeoPoint?, err: NSError?) -> Void in
+            employee!["coordinates"] = coordinates
           
-          employee.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+            employee!.saveInBackgroundWithBlock { (success: Bool, err: NSError?) -> Void in
             
-          })
-        })
+            }
+          }
+        }
       }
     }
   }
@@ -228,18 +232,16 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
     
     q.whereKey("user", equalTo: user!)
     
-    q.findObjectsInBackgroundWithBlock { (employees: [AnyObject]?, error: NSError?) -> Void in
-      if let employee = employees?.first as? PFObject {
-        if self.availableSwitch.on {
-          employee["available"] = true
-        }
-        else {
-          employee["available"] = false
-        }
+    q.getFirstObjectInBackgroundWithBlock { (employee: PFObject?, error: NSError?) -> Void in
+      if self.availableSwitch.on {
+        employee!["available"] = true
+      }
+      else {
+        employee!["available"] = false
+      }
         
-        employee.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+      employee!.saveInBackgroundWithBlock { (success: Bool, err: NSError?) -> Void in
           
-        })
       }
     }
   }
