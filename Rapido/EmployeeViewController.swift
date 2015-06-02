@@ -19,6 +19,9 @@ class EmployeeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    avatarImageView.layer.masksToBounds = true
+    
     if let employee = job!["employee"] as? PFObject {
       employee.fetchIfNeeded()
       

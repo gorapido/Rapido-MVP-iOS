@@ -19,6 +19,9 @@ class AskViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    avatarImageView.layer.masksToBounds = true
+    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
     
     if let consumer = job!["consumer"] as? PFUser {

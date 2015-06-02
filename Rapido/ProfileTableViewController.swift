@@ -21,6 +21,9 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    avatarImageView.layer.masksToBounds = true
+    
     if let user = PFUser.currentUser() {
         let q = PFQuery(className: "Employee")
         

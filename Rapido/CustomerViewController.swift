@@ -21,6 +21,9 @@ class CustomerViewController: UIViewController, MKMapViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    avatarImageView.layer.masksToBounds = true
+    
     if let consumer = job!["consumer"] as? PFUser {
       consumer.fetchIfNeeded()
     
