@@ -84,6 +84,8 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
     var query = PFQuery(className: "Company")
     var category = categories[indexPath.row]
     var companies: [PFObject]?

@@ -93,6 +93,8 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
     if indexPath.section == 0 && indexPath.row == 0 {
       let imageActionSheet = UIActionSheet()
       
