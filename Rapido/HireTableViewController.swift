@@ -229,6 +229,10 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     determineSituation()
   }
   
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return 99
+  }
+  
   /*
   // Override to support conditional editing of the table view.
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
