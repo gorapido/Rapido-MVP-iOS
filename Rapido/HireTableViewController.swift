@@ -98,6 +98,12 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   
   func signInSuccessfully() {
     sessionNVC?.dismissViewControllerAnimated(true, completion: nil)
+    
+    if let user = PFUser.currentUser() {
+      if user.isNew == true {
+        tabBarController?.selectedIndex = 1
+      }
+    }
   }
   
   func presentationDidFinish(situation: Situation) {

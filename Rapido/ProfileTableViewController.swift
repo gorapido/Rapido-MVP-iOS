@@ -18,6 +18,8 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   
   let manager = CLLocationManager()
   
+  var isEmployee: Bool?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -36,15 +38,21 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
             }
             
             self.availableSwitch.on = employee!["available"] as! Bool
+            
+            self.isEmployee = true
           }
           else {
             self.manager.requestWhenInUseAuthorization()
             
-            let indexPath = NSIndexPath(forRow: 3, inSection: 1)
+            //let indexPath = NSIndexPath(forRow: 3, inSection: 1)
             
-            let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
+            //let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
             
-            tableViewCell?.hidden = true
+            //tableViewCell?.hidden = true
+            
+            //self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            
+            self.isEmployee = false
           }
           
           self.manager.delegate = self
@@ -150,6 +158,22 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     return height
+  }
+  
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if section == 1 {
+      if isEmployee == true {
+        return 4
+      }
+      else {
+        return 3
+      }
+    }
+    else if section == 2 {
+      return 4
+    }
+    
+    return 1
   }
   
   func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
