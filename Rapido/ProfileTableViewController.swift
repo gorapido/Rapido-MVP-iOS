@@ -8,8 +8,9 @@
 
 import UIKit
 import MobileCoreServices
+import MessageUI
 
-class ProfileTableViewController: UITableViewController, UIActionSheetDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class ProfileTableViewController: UITableViewController, UIActionSheetDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
   
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
@@ -17,6 +18,7 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   @IBOutlet weak var availableSwitch: UISwitch!
   
   let manager = CLLocationManager()
+  let mc = MFMailComposeViewController()
   
   var isEmployee: Bool?
   
@@ -91,10 +93,18 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if indexPath.section == 3 && indexPath.row == 0 {
-      PFUser.logOut()
+    if indexPath.section == 0 && indexPath.row == 0 {
+      let imageActionSheet = UIActionSheet()
       
-      tabBarController?.selectedIndex = 0
+      imageActionSheet.delegate = self
+      
+      imageActionSheet.addButtonWithTitle("Take selfie")
+      imageActionSheet.addButtonWithTitle("Choose existing photo")
+      imageActionSheet.addButtonWithTitle("Cancel")
+      
+      imageActionSheet.cancelButtonIndex = 2
+      
+      imageActionSheet.showInView(self.view)
     }
     else if indexPath.section == 1 {
       if (indexPath.row == 2) {
@@ -122,23 +132,27 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
           
-        })
+          })
         
         presentViewController(alert, animated: true, completion: nil)
       }
     }
-    else if indexPath.section == 0 && indexPath.row == 0 {
-      let imageActionSheet = UIActionSheet()
+    else if indexPath.section == 2 {
+      if indexPath.row == 0 {
+        
+      }
+      else if indexPath.row == 1 {
+        mc.mailComposeDelegate = self
+        mc.setSubject("Contact Rapido")
+        mc.setToRecipients(["alex@gorapido.co"])
+        
+        presentViewController(mc, animated: true, completion: nil)
+      }
+    }
+    else if indexPath.section == 3 && indexPath.row == 0 {
+      PFUser.logOut()
       
-      imageActionSheet.delegate = self
-      
-      imageActionSheet.addButtonWithTitle("Take selfie")
-      imageActionSheet.addButtonWithTitle("Choose existing photo")
-      imageActionSheet.addButtonWithTitle("Cancel")
-      
-      imageActionSheet.cancelButtonIndex = 2
-      
-      imageActionSheet.showInView(self.view)
+      tabBarController?.selectedIndex = 0
     }
   }
   
@@ -271,6 +285,10 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
           
       }
     }
+  }
+  
+  func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   /*
