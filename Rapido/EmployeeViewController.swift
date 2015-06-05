@@ -22,6 +22,8 @@ class EmployeeViewController: UIViewController {
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
     avatarImageView.layer.masksToBounds = true
     
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
+    
     if let employee = job!["employee"] as? PFObject {
       employee.fetchIfNeeded()
       
@@ -50,6 +52,25 @@ class EmployeeViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
+  @IBAction func denyTouchUpInside(sender: AnyObject) {
+    var alert = UIAlertController(title: "Cancel Job", message: "Are you sure you want to cancel this request?", preferredStyle: .Alert)
+    
+    alert.addAction(UIAlertAction(title: "Yes", style: .Default) { action in
+      job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+        self.delegate?.presentationDidFinish(.Empty)
+      })
+      })
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+      
+      })
+    
+    presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func notificationReceived() {
+    delegate?.presentationDidFinish(.Empty)
+  }
   
   /*
   // MARK: - Navigation

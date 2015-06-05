@@ -24,6 +24,8 @@ class CustomerViewController: UIViewController, MKMapViewDelegate {
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
     avatarImageView.layer.masksToBounds = true
     
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
+    
     if let consumer = job!["consumer"] as? PFUser {
       consumer.fetchIfNeeded()
     
@@ -107,6 +109,10 @@ class CustomerViewController: UIViewController, MKMapViewDelegate {
     job?.saveInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
       self.delegate?.presentationDidFinish(.Empty)
     })
+  }
+  
+  func notificationReceived() {
+    delegate?.presentationDidFinish(.Empty)
   }
   
   /*

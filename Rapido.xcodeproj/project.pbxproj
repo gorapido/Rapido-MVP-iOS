@@ -22,6 +22,7 @@
 		FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA6A1AD89081006FED5F /* RapidoTests.swift */; };
 		FA8831C61ADABD11007A3268 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */; };
 		FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8831C71ADABD1D007A3268 /* SignInViewController.swift */; };
+		FA8ADBE61B20BB8C0098F903 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */; };
 		FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B051ADC27920097F89A /* HireTableViewController.swift */; };
 		FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */; };
 		FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8304B1AEFE6900005053F /* PendingViewController.swift */; };
@@ -60,11 +61,12 @@
 		FA78AA6A1AD89081006FED5F /* RapidoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidoTests.swift; sourceTree = "<group>"; };
 		FA8831C51ADABD11007A3268 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		FA8831C71ADABD1D007A3268 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		FA8831C91ADAD5E2007A3268 /* Rapido-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rapido-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		FA9B8B051ADC27920097F89A /* HireTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireTableViewController.swift; sourceTree = "<group>"; };
 		FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesTableViewController.swift; sourceTree = "<group>"; };
 		FAB8304B1AEFE6900005053F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
+		FAFFC1E61B214FC30080F6CE /* Rapido-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rapido-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,13 +128,13 @@
 		FA78AA4F1AD89081006FED5F /* Rapido */ = {
 			isa = PBXGroup;
 			children = (
-				FA8831C41ADABBC1007A3268 /* ViewControllers */,
+				FA8831C41ADABBC1007A3268 /* View Controllers */,
 				FA78AA521AD89081006FED5F /* AppDelegate.swift */,
 				FA78AA581AD89081006FED5F /* Main.storyboard */,
 				FA78AA5B1AD89081006FED5F /* Images.xcassets */,
 				FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */,
 				FA78AA501AD89081006FED5F /* Supporting Files */,
-				FA8831C91ADAD5E2007A3268 /* Rapido-Bridging-Header.h */,
+				FAFFC1E61B214FC30080F6CE /* Rapido-Bridging-Header.h */,
 			);
 			path = Rapido;
 			sourceTree = "<group>";
@@ -162,7 +164,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FA8831C41ADABBC1007A3268 /* ViewControllers */ = {
+		FA8831C41ADABBC1007A3268 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				FA8831C71ADABD1D007A3268 /* SignInViewController.swift */,
@@ -178,8 +180,9 @@
 				FA31DC0E1AF122F90038743F /* AskViewController.swift */,
 				FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */,
 				FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */,
+				FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */,
 			);
-			name = ViewControllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +334,7 @@
 				FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */,
 				FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */,
 				FA1E021B1AF1C1FA00BECA5C /* EmployeeViewController.swift in Sources */,
+				FA8ADBE61B20BB8C0098F903 /* WebViewController.swift in Sources */,
 				FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,13 +460,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
 				INFOPLIST_FILE = Rapido/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "83e07d92-aab7-4ac9-9c94-bf668af0342e";
+				PROVISIONING_PROFILE = "0840b2d5-f557-4d3c-ba94-06f926028e5a";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rapido/Rapido-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -474,13 +478,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Hernandez (HJ7NRYDTKA)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bahamut Corporation (WUJ99XZ7J2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bahamut Corporation (WUJ99XZ7J2)";
 				INFOPLIST_FILE = Rapido/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "83e07d92-aab7-4ac9-9c94-bf668af0342e";
+				PROVISIONING_PROFILE = "0840b2d5-f557-4d3c-ba94-06f926028e5a";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rapido/Rapido-Bridging-Header.h";
 			};
 			name = Release;

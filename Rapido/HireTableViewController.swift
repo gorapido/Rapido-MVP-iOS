@@ -28,7 +28,7 @@ protocol PresentaionDelegate {
 
 class HireTableViewController: UITableViewController, SessionDelegate, PresentaionDelegate {
   
-  let categories = ["HVAC", "Plumbing", "Electricity", "Other"]
+  let categories = ["Air & Heating", "Plumbing", "Electric", "Other"]
   
   var situation = Situation.Empty
   var sessionNVC: UINavigationController?

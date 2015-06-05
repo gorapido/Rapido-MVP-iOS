@@ -72,9 +72,19 @@ class AskViewController: UIViewController {
   }
   
   @IBAction func denyTouchUpInside(sender: AnyObject) {
-    job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
-      self.delegate?.presentationDidFinish(.Empty)
-    })
+    var alert = UIAlertController(title: "Cancel Job", message: "Are you sure you want to cancel this request?", preferredStyle: .Alert)
+    
+    alert.addAction(UIAlertAction(title: "Yes", style: .Default) { action in
+      job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
+        self.delegate?.presentationDidFinish(.Empty)
+      })
+      })
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+      
+      })
+    
+    presentViewController(alert, animated: true, completion: nil)
   }
   
   func notificationReceived() {

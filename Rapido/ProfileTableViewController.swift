@@ -46,14 +46,6 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
           else {
             self.manager.requestWhenInUseAuthorization()
             
-            //let indexPath = NSIndexPath(forRow: 3, inSection: 1)
-            
-            //let tableViewCell = self.tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
-            
-            //tableViewCell?.hidden = true
-            
-            //self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-            
             self.isEmployee = false
           }
           
@@ -130,18 +122,18 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
               
             }
           }
-          })
+        })
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
           
-          })
+        })
         
         presentViewController(alert, animated: true, completion: nil)
       }
     }
     else if indexPath.section == 2 {
       if indexPath.row == 0 {
-        
+        performSegueWithIdentifier("webViewSegue", sender: "https://www.surveymonkey.com/s/FWCMFBG")
       }
       else if indexPath.row == 1 {
         mc.mailComposeDelegate = self
@@ -149,6 +141,12 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
         mc.setToRecipients(["alex@gorapido.co"])
         
         presentViewController(mc, animated: true, completion: nil)
+      }
+      else if indexPath.row == 2 {
+        performSegueWithIdentifier("webViewSegue", sender: "https://drive.google.com/file/d/0B4E_KqMyCBfMZkxnRUpfSkIxNlk/view?usp=sharing")
+      }
+      else if indexPath.row == 3 {
+        performSegueWithIdentifier("webViewSegue", sender: "https://drive.google.com/a/gorapido.co/file/d/0B4E_KqMyCBfMYm5QanI2aFZTNlk/view?usp=sharing")
       }
     }
     else if indexPath.section == 3 && indexPath.row == 0 {
@@ -293,14 +291,14 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   
-  /*
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
+    let wc = segue.destinationViewController as! WebViewController
+    
+    wc.url = NSURL(string: sender as! String)
   }
-  */
   
 }

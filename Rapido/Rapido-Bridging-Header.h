@@ -1,5 +1,9 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  Rapido-Bridging-Header.h
+//  Rapido
+//
+//  Created by Alexander Hernandez on 6/4/15.
+//  Copyright (c) 2015 Rapido. All rights reserved.
 //
 
 #import <Parse/Parse.h>
