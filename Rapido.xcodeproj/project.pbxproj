@@ -237,6 +237,11 @@
 					FA78AA4C1AD89081006FED5F = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = WUJ99XZ7J2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					FA78AA631AD89081006FED5F = {
 						CreatedOnToolsVersion = 6.2;

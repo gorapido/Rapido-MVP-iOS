@@ -50,8 +50,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   @IBAction func signInTapped(sender: AnyObject) {
     PFUser.logInWithUsernameInBackground(email.text, password: passwd.text) { (user: PFUser?, err: NSError?) -> Void in
       if user != nil {
-        //user?.pin()
-        self.delegate?.signInSuccessfully()
+        user?.pinInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
+          self.delegate?.signInSuccessfully()
+        })
       } else {
         
       }

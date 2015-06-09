@@ -74,6 +74,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    if application.applicationState == UIApplicationState.Inactive {
+      PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: { (finished: Bool, error: NSError?) -> Void in
+      
+      })
+    }
     
     NSNotificationCenter.defaultCenter().postNotificationName("notificationReceived", object: nil)
     
