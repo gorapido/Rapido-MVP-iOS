@@ -25,6 +25,8 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    view.userInteractionEnabled = false
+    
     avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
     avatarImageView.layer.masksToBounds = true
     
@@ -42,6 +44,8 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
             self.availableSwitch.on = employee!["available"] as! Bool
             
             self.isEmployee = true
+            
+            self.tableView.reloadData()
           }
           else {
             self.manager.requestWhenInUseAuthorization()
@@ -57,6 +61,8 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
         }
       
       self.availableSwitch.addTarget(self, action: Selector("availableSwitchChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+      
+      view.userInteractionEnabled = true
     }
   }
   
@@ -296,9 +302,11 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    let wc = segue.destinationViewController as! WebViewController
+    if segue.identifier == "webViewSegue" {
+      let wc = segue.destinationViewController as! WebViewController
     
-    wc.url = NSURL(string: sender as! String)
+      wc.url = NSURL(string: sender as! String)
+    }
   }
   
 }
