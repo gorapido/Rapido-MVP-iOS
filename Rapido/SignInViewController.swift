@@ -96,6 +96,34 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     })
   }
   
+  @IBAction func facebookTouchUpInside(sender: AnyObject) {
+    PFFacebookUtils.logInInBackgroundWithReadPermissions(["email"], block: { (user: PFUser?, error: NSError?) -> Void in
+      if let user = user {
+        self.delegate?.signInSuccessfully()
+      }
+    })
+  }
+  
+  @IBAction func forgotPasswordTouchUpInside(sender: AnyObject) {
+    var alert = UIAlertController(title: "Forgot Password?", message: "Enter your email address to reset it.", preferredStyle: .Alert)
+    
+    alert.addTextFieldWithConfigurationHandler({ email in
+      email.placeholder = "you@example.com"
+    })
+    
+    alert.addAction(UIAlertAction(title: "OK", style: .Default) { action in
+      let email = alert.textFields![0] as! UITextField
+      
+      PFUser.requestPasswordResetForEmail(email.text)
+    })
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+      
+    })
+    
+    presentViewController(alert, animated: true, completion: nil)
+  }
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation

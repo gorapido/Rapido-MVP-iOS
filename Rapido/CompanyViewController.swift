@@ -15,11 +15,14 @@ class CompanyViewController: UIViewController {
   @IBOutlet weak var logoImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var summaryTextView: UITextView!
+  @IBOutlet weak var siteButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    nameLabel.text = company?.valueForKey("name") as? String
-    summaryTextView.text = company?.valueForKey("summary") as? String
+    
+    nameLabel.text = company?["name"] as? String
+    summaryTextView.text = company?["summary"] as? String
+    siteButton.setTitle(company?["site"] as? String, forState: .Normal)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -58,14 +61,28 @@ class CompanyViewController: UIViewController {
     }
   }
   
-  /*
+  @IBAction func callTouchUpInside(sender: AnyObject) {
+    let phone = company?["phone"] as! String
+    let call = NSURL(string: "tel://\(phone)")
+    
+    UIApplication.sharedApplication().openURL(call!)
+  }
+  
+  @IBAction func siteTouchUpInside(sender: AnyObject) {
+    performSegueWithIdentifier("WebViewControllerSegue", sender: company?["site"])
+  }
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
   // Get the new view controller using segue.destinationViewController.
   // Pass the selected object to the new view controller.
+    if segue.identifier == "WebViewControllerSegue" {
+      let wc = segue.destinationViewController as! WebViewController
+      
+      wc.url = NSURL(string: sender as! String)
+    }
   }
-  */
   
 }

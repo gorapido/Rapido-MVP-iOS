@@ -31,14 +31,26 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   let categories = ["Air & Heating", "Plumbing", "Electric", "Other"]
   
   var situation = Situation.Empty
-  var sessionNVC: UINavigationController?
+  var sessionNavigationViewController: UINavigationController?
   var presentationVC: UIViewController?
   var job: PFObject?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
+    
+    let lightGray = UIColor(red: 0xCC, green: 0xCC, blue: 0xCC, alpha: 1)
+    // let americanRose = UIColor(red: 0xDC, green: 0x14, blue: 0x3C, alpha: 1)
+    
+    UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: lightGray], forState: .Normal)
+    UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Selected)
+    
+    for item in tabBarController!.tabBar.items as! [UITabBarItem] {
+      if let image = item.image {
+        item.image = image.imageWithRenderingMode(.AlwaysOriginal)
+      }
+    }
     
     determineSituation()
   }
@@ -48,13 +60,13 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       activateSituation()
     }
     else {
-      sessionNVC = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
+      sessionNavigationViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
       
-      let signInVC = sessionNVC?.viewControllers.first as! SignInViewController
+      let signInViewController = sessionNavigationViewController?.viewControllers.first as! SignInViewController
       
-      signInVC.delegate = self
+      signInViewController.delegate = self
       
-      presentViewController(sessionNVC!, animated: true, completion: nil)
+      presentViewController(sessionNavigationViewController!, animated: true, completion: nil)
     }
   }
   
@@ -99,7 +111,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   }
   
   func signInSuccessfully() {
-    sessionNVC?.dismissViewControllerAnimated(true, completion: nil)
+    sessionNavigationViewController?.dismissViewControllerAnimated(true, completion: nil)
     
     if let user = PFUser.currentUser() {
       if user.isNew == true {

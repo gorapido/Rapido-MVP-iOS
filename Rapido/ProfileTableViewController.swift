@@ -107,6 +107,12 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
       imageActionSheet.showInView(self.view)
     }
     else if indexPath.section == 1 {
+      if (indexPath.row == 0) {
+        performSegueWithIdentifier("EditProfileFormViewControllerSegue", sender: nil)
+      }
+      else if (indexPath.row == 1) {
+        performSegueWithIdentifier("EditProfileFormViewControllerSegue", sender: nil)
+      }
       if (indexPath.row == 2) {
         var alert = UIAlertController(title: "Sign In to Rapido", message: "Enter your Rapido password to continue.", preferredStyle: .Alert)
         
@@ -122,7 +128,7 @@ class ProfileTableViewController: UITableViewController, UIActionSheetDelegate, 
           
           PFUser.logInWithUsernameInBackground(user.email!, password: passwd.text) { (user: PFUser?, err: NSError?) -> Void in
             if user != nil {
-              self.performSegueWithIdentifier("passwordTCVSegue", sender: nil)
+              self.performSegueWithIdentifier("EditProfileFormViewControllerSegue", sender: nil)
             }
             else {
               

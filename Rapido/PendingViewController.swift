@@ -32,11 +32,11 @@ class PendingViewController: UIViewController {
       job?.deleteInBackgroundWithBlock({ (success: Bool, err: NSError?) -> Void in
         self.delegate?.presentationDidFinish(.Empty)
       })
-      })
+    })
     
     alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
       
-      })
+    })
     
     presentViewController(alert, animated: true, completion: nil)
   }

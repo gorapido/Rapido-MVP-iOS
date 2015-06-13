@@ -13,12 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     Parse.enableLocalDatastore()
-    
     Parse.setApplicationId("cJa6opkW95Jqat6TYQ92UHCqimkZwm8Wdb40kxAY",
       clientKey: "mpdNC6SshAPwaY8DvDRQp1v8YxKIjAn1C3W8Nz07")
+    
+    if let launchOptions = launchOptions {
+      PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+    }
+    else {
+      PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions([NSObject: AnyObject]())
+    }
     
     let userNotificationTypes = (UIUserNotificationType.Alert |
       UIUserNotificationType.Badge |
@@ -48,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationDidBecomeActive(application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    FBSDKAppEvents.activateApp()
   }
   
   func applicationWillTerminate(application: UIApplication) {
@@ -83,6 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NSNotificationCenter.defaultCenter().postNotificationName("notificationReceived", object: nil)
     
     completionHandler(UIBackgroundFetchResult.NewData)
+  }
+  
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
   }
   
 }

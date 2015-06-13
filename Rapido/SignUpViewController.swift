@@ -14,6 +14,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
+  @IBOutlet weak var phoneTextField: UITextField!
   
   var delegate: SessionDelegate?
   var kbHeight: CGFloat?
@@ -29,6 +30,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     firstNameTextField.delegate = self
     lastNameTextField.delegate = self
+    phoneTextField.delegate = self
     emailTextField.delegate = self
     passwordTextField.delegate = self
   }
@@ -54,18 +56,48 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   @IBAction func signUpTouchUpInside(sender: AnyObject) {
     let user = PFUser()
     
-    user.username = emailTextField.text
-    user.email = emailTextField.text
-    user.password = passwordTextField.text
-    user["firstName"] = firstNameTextField.text as String
-    user["lastName"] = lastNameTextField.text as String
+    var invalid = false
     
-    user.signUpInBackgroundWithBlock() { (success: Bool, err: NSError?) -> Void in
-      if success {
-        self.delegate?.signInSuccessfully()
-      }
-      else {
+    if (firstNameTextField.text.isEmpty) {
+      shakeUp(firstNameTextField)
+      invalid = true
+    }
+    
+    if (lastNameTextField.text.isEmpty) {
+      shakeUp(lastNameTextField)
+      invalid = true
+    }
+    
+    if (emailTextField.text.isEmpty) {
+      shakeUp(emailTextField)
+      invalid = true
+    }
+    
+    if (phoneTextField.text.isEmpty) {
+      shakeUp(phoneTextField)
+      invalid = true
+    }
+    
+    if (passwordTextField.text.isEmpty) {
+      shakeUp(passwordTextField)
+      invalid = true
+    }
+    
+    if (!invalid) {
+      user.username = emailTextField.text
+      user["phone"] = phoneTextField.text
+      user.email = emailTextField.text
+      user.password = passwordTextField.text
+      user["firstName"] = firstNameTextField.text as String
+      user["lastName"] = lastNameTextField.text as String
+    
+      user.signUpInBackgroundWithBlock() { (success: Bool, err: NSError?) -> Void in
+        if success {
+          self.delegate?.signInSuccessfully()
+        }
+        else {
         
+        }
       }
     }
   }
@@ -101,6 +133,58 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     UIView.animateWithDuration(0.3, animations: {
       self.view.frame = CGRectOffset(self.view.frame, 0, movement!)
     })
+  }
+  
+  @IBAction func facebookTouchUpInside(sender: AnyObject) {
+    PFFacebookUtils.logInInBackgroundWithReadPermissions(["email"], block: { (user: PFUser?, error: NSError?) -> Void in
+      if let user = user {
+        let profileRequest = FBSDKGraphRequest(graphPath: "me/?fields=first_name,last_name,email,picture", parameters: nil)
+        
+        profileRequest.startWithCompletionHandler({ (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+          
+          user["email"] = result["email"]
+          user["firstName"] = result["first_name"]
+          user["lastName"] = result["last_name"]
+          
+          let imageURL = result.valueForKey("picture")?.valueForKey("data")?.valueForKey("url") as! String
+          
+          let url = NSURL(string: imageURL)
+          
+          if let data = NSData(contentsOfURL: url!) {
+            let avatar = PFFile(data: data)
+            
+            avatar.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
+              if finished {
+                user["avatar"] = avatar
+                
+                user.saveInBackground()
+              }
+            })
+          }
+          
+          user.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
+            if finished {
+              self.delegate?.signInSuccessfully()
+            }
+            else {
+              println(error)
+            }
+          })
+        })
+      }
+    })
+  }
+  
+  func shakeUp(texField: UITextField) {
+    let animation = CAKeyframeAnimation()
+    
+    animation.keyPath = "position.x"
+    animation.values =  [0, 20, -20, 10, 0]
+    animation.keyTimes = [0, (1 / 6.0), (3 / 6.0), (5 / 6.0), 1]
+    animation.duration = 0.3
+    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+    animation.additive = true
+    texField.layer.addAnimation(animation, forKey: "shake")
   }
   
   /*
