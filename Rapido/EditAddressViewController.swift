@@ -1,39 +1,56 @@
 //
-//  ChangePasswordViewController.swift
+//  EditAddressViewController.swift
 //  Rapido
 //
-//  Created by Alexander Hernandez on 6/12/15.
+//  Created by Alexander Hernandez on 6/22/15.
 //  Copyright (c) 2015 Rapido. All rights reserved.
 //
 
 import UIKit
 
-class ChangePasswordFormViewController: XLFormViewController {
+class EditAddressViewController: XLFormViewController {
   
-  var user:PFUser?
+  var user: PFObject?
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
     let form = XLFormDescriptor()
     
-    let passwordSection = XLFormSectionDescriptor()
+    let addressSection = XLFormSectionDescriptor()
     
-    form.addFormSection(passwordSection)
+    form.addFormSection(addressSection)
     
-    let password = XLFormRowDescriptor(tag: "password", rowType: XLFormRowDescriptorTypePassword, title: nil)
+    let street = XLFormRowDescriptor(tag: "street", rowType: XLFormRowDescriptorTypeText, title: nil)
     
-    password.cellConfigAtConfigure["textField.placeholder"] = "password"
-    password.required = true
+    street.cellConfigAtConfigure["textField.placeholder"] = "Street"
     
-    let confirmPassword = XLFormRowDescriptor(tag: "confirmPassword", rowType: XLFormRowDescriptorTypePassword, title: nil)
+    street.required = true
     
-    confirmPassword.cellConfigAtConfigure["textField.placeholder"] = "confirm password"
+    let city = XLFormRowDescriptor(tag: "city", rowType: XLFormRowDescriptorTypeText, title: nil)
     
-    confirmPassword.required = true
+    city.cellConfigAtConfigure["textField.placeholder"] = "City"
     
-    passwordSection.addFormRow(password)
-    passwordSection.addFormRow(confirmPassword)
+    city.required = true
+    
+    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: "State")
+    
+    state.cellConfigAtConfigure["textField.placeholder"] = "State"
+    
+    //state.required = true
+    state.disabled = true
+    state.value = "FL"
+    
+    let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
+    
+    postalCode.cellConfigAtConfigure["textField.placeholder"] = "Postal Code"
+    
+    postalCode.required = true
+    
+    addressSection.addFormRow(street)
+    addressSection.addFormRow(city)
+    addressSection.addFormRow(state)
+    addressSection.addFormRow(postalCode)
     
     self.form = form
   }
@@ -43,26 +60,28 @@ class ChangePasswordFormViewController: XLFormViewController {
     
     // Do any additional setup after loading the view.
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "validateForm:")
+    
+    form.formRowWithTag("street").value = user?["street"]
+    form.formRowWithTag("city").value = user?["city"]
+    form.formRowWithTag("postalCode").value = user?["postalCode"]
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-    
   }
   
-  func validateForm(sender: UIBarButtonItem) {
+  func validateForm(button: UIBarButtonItem) {
     if formValidationErrors().count == 0 {
-      let password = formValues()!["password"] as! String
-      let confirmPassword = formValues()!["confirmPassword"] as! String
+      user!["street"] = formValues()!["street"]
+      user!["city"] = formValues()!["city"]
+      user!["postalCode"] = formValues()!["postalCode"]
       
-      if password == confirmPassword {
-        user?.password = password
-        
-        user?.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
+      user?.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
+        if (finished) {
           self.navigationController?.popToRootViewControllerAnimated(true)
-        })
-      }
+        }
+      })
     }
     else {
       for error in formValidationErrors() {

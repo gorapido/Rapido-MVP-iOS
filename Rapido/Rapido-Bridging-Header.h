@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 #import <XLForm/XLForm.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>

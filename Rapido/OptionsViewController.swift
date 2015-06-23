@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class OptionsFormViewController: XLFormViewController, MFMailComposeViewControllerDelegate {
+class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, PFLogInViewControllerDelegate {
   
   var user: PFUser?
   
@@ -30,11 +30,16 @@ class OptionsFormViewController: XLFormViewController, MFMailComposeViewControll
     
     editProfile.action.formSelector = "didTouchEditProfile:"
     
+    let editAddress = XLFormRowDescriptor(tag: "editAddress", rowType: XLFormRowDescriptorTypeButton, title: "Edit Address")
+    
+    editAddress.action.formSelector = "didTouchEditAddress:"
+    
     let changePassword = XLFormRowDescriptor(tag: "changePassword", rowType: XLFormRowDescriptorTypeButton, title: "Change Password")
     
     changePassword.action.formSelector = "didTouchChangePassword:"
     
     personalSection.addFormRow(editProfile)
+    personalSection.addFormRow(editAddress)
     personalSection.addFormRow(changePassword)
     
     let socialSection = XLFormSectionDescriptor()
@@ -119,17 +124,31 @@ class OptionsFormViewController: XLFormViewController, MFMailComposeViewControll
   }
   
   func didTouchEditProfile(sender: XLFormRowDescriptor) {
-    performSegueWithIdentifier("EditProfileFormViewControllerSegue", sender: nil)
+    performSegueWithIdentifier("EditProfileViewControllerSegue", sender: nil)
+  }
+  
+  func didTouchEditAddress(sender: XLFormRowDescriptor) {
+    performSegueWithIdentifier("EditAddressViewControllerSegue", sender: nil)
   }
   
   func didTouchChangePassword(sender: XLFormRowDescriptor) {
-    performSegueWithIdentifier("ChangePasswordFormViewControllerSegue", sender: nil)
+    performSegueWithIdentifier("ChangePasswordViewControllerSegue", sender: nil)
   }
   
   func didTouchSignOut(sender: XLFormRowDescriptor) {
     PFUser.logOut()
     
-    tabBarController?.selectedIndex = 0
+    //tabBarController?.selectedIndex = 0
+    
+    let logInController = PFLogInViewController()
+    
+    logInController.delegate = self
+    logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten | PFLogInFields.Facebook)
+    logInController.logInView?.logo = nil
+    logInController.signUpController?.emailAsUsername = true
+    logInController.signUpController?.signUpView?.logo = nil
+    
+    presentViewController(logInController, animated: true, completion: nil)
   }
   
   func didTouchFacebook(sender: XLFormRowDescriptor) {
@@ -172,6 +191,14 @@ class OptionsFormViewController: XLFormViewController, MFMailComposeViewControll
     dismissViewControllerAnimated(true, completion: nil)
   }
   
+  func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -179,15 +206,20 @@ class OptionsFormViewController: XLFormViewController, MFMailComposeViewControll
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
     
-    if segue.identifier == "EditProfileFormViewControllerSegue" {
-      let editProfileFormViewController = segue.destinationViewController as! EditProfileFormViewController
+    if segue.identifier == "EditProfileViewControllerSegue" {
+      let editProfileViewController = segue.destinationViewController as! EditProfileViewController
       
-      editProfileFormViewController.user = user
+      editProfileViewController.user = user
     }
-    else if segue.identifier == "ChangePasswordFormViewControllerSegue" {
-      let changePasswordFormViewController = segue.destinationViewController as! ChangePasswordFormViewController
+    else if segue.identifier == "EditAddressViewControllerSegue" {
+      let editProfileViewController = segue.destinationViewController as! EditAddressViewController
       
-      changePasswordFormViewController.user = user
+      editProfileViewController.user = user
+    }
+    else if segue.identifier == "ChangePasswordViewControllerSegue" {
+      let changePasswordViewController = segue.destinationViewController as! ChangePasswordViewController
+      
+      changePasswordViewController.user = user
     }
     else {
       let webViewController = segue.destinationViewController as! WebViewController

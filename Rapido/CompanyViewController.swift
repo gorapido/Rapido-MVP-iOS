@@ -28,7 +28,7 @@ class CompanyViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     let logo = company?.valueForKey("logo") as? PFFile;
     
-    logo!.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
+    logo?.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
       let image = UIImage(data: data!)
       
       self.logoImageView.image = image

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileFormViewController: XLFormViewController {
+class EditProfileViewController: XLFormViewController {
   
   var user: PFUser?
   
@@ -33,27 +33,23 @@ class EditProfileFormViewController: XLFormViewController {
     
     firstName.cellConfigAtConfigure["textField.placeholder"] = "first name"
     firstName.required = true
-    //firstName.value = user!["firstName"]
     
     let lastName = XLFormRowDescriptor(tag: "lastName", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     lastName.cellConfigAtConfigure["textField.placeholder"] = "last name"
     lastName.required = true
-    //lastName.value = user!["lastName"]
     
     let email = XLFormRowDescriptor(tag: "email", rowType: XLFormRowDescriptorTypeEmail, title: nil)
     
     email.cellConfigAtConfigure["textField.placeholder"] = "email"
     email.addValidator(XLFormValidator.emailValidator())
     email.required = true
-    //email.value = user!["email"]
     
     let phone = XLFormRowDescriptor(tag: "phone", rowType: XLFormRowDescriptorTypePhone, title: nil)
     
     phone.cellConfigAtConfigure["textField.placeholder"] = "phone"
-    phone.addValidator(XLFormRegexValidator(msg: "Must be a valid phone number!", regex: "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$"))
+    phone.addValidator(XLFormRegexValidator(msg: "Must be a valid phone number!", regex: "\\+?1?\\s*\\(?-*\\.*(\\d{3})\\)?\\.*-*\\s*(\\d{3})\\.*-*\\s*(\\d{4})$"))
     phone.required = true
-    //phone.value = user!["phone"]
     
     personalSection.addFormRow(firstName)
     personalSection.addFormRow(lastName)

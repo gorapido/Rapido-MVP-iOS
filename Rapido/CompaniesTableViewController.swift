@@ -41,16 +41,16 @@ class CompaniesTableViewController: UITableViewController {
     let company = companies?[indexPath.row] as PFObject?
     
     cell.textLabel?.text = company?["name"] as? String
-    //cell.detailTextLabel?.text = companies["distance"] as String
-    cell.detailTextLabel?.text = ""
     cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
     
     let logo = company?.valueForKey("logo") as? PFFile;
     
-    logo!.getDataInBackgroundWithBlock({ (data: NSData?, err: NSError?) -> Void in
-      let image = UIImage(data: data!)
+    logo?.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) in
+      if error == nil {
+        let image = UIImage(data: data!)
       
-      cell.imageView?.image = image
+        cell.imageView?.image = image
+      }
     })
     
     return cell

@@ -18,20 +18,19 @@ enum Situation {
   case Review
 }
 
-protocol SessionDelegate {
-  func signInSuccessfully()
-}
-
 protocol PresentaionDelegate {
   func presentationDidFinish(situation: Situation)
 }
 
-class HireTableViewController: UITableViewController, SessionDelegate, PresentaionDelegate {
+protocol GRLogInViewControllerDelegate: PFLogInViewControllerDelegate {
+  func finishedLoggingIn()
+}
+
+class HireTableViewController: UITableViewController, PresentaionDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, GRLogInViewControllerDelegate {
   
   let categories = ["Air & Heating", "Plumbing", "Electric", "Other"]
   
-  var situation = Situation.Empty
-  var sessionNavigationViewController: UINavigationController?
+  var situation: Situation = .Empty
   var presentationVC: UIViewController?
   var job: PFObject?
   
@@ -41,7 +40,6 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationReceived"), name: "notificationReceived", object: nil)
     
     let lightGray = UIColor(red: 0xCC, green: 0xCC, blue: 0xCC, alpha: 1)
-    // let americanRose = UIColor(red: 0xDC, green: 0x14, blue: 0x3C, alpha: 1)
     
     UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: lightGray], forState: .Normal)
     UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Selected)
@@ -52,21 +50,17 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       }
     }
     
-    determineSituation()
-  }
-  
-  override func viewWillAppear(animated: Bool) {
-    if let user = PFUser.currentUser() {
+    if let user = GRUser.currentUser() {
+      determineSituation()
       activateSituation()
     }
     else {
-      sessionNavigationViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionNVC") as? UINavigationController
+      let logInController = LogInViewController()
       
-      let signInViewController = sessionNavigationViewController?.viewControllers.first as! SignInViewController
+      logInController.delegate = self
+      logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten)
       
-      signInViewController.delegate = self
-      
-      presentViewController(sessionNavigationViewController!, animated: true, completion: nil)
+      presentViewController(logInController, animated: false, completion: nil)
     }
   }
   
@@ -85,7 +79,6 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     return categories.count
   }
   
-  
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("category", forIndexPath: indexPath) as! UITableViewCell
     
@@ -98,6 +91,9 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
+    performSegueWithIdentifier("CompaniesQueryTableViewControllerSegue", sender: categories[indexPath.row])
+    
+    /*
     var query = PFQuery(className: "Company")
     var category = categories[indexPath.row]
     var companies: [PFObject]?
@@ -108,16 +104,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
       
       self.performSegueWithIdentifier("companiesTVCSegue", sender: companies)
     }
-  }
-  
-  func signInSuccessfully() {
-    sessionNavigationViewController?.dismissViewControllerAnimated(true, completion: nil)
-    
-    if let user = PFUser.currentUser() {
-      if user.isNew == true {
-        tabBarController?.selectedIndex = 1
-      }
-    }
+    */
   }
   
   func presentationDidFinish(situation: Situation) {
@@ -176,8 +163,8 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
           currentJob.whereKey("employee", equalTo: employee!)
           currentJob.whereKeyDoesNotExist("finish")
           
-          currentJob.getFirstObjectInBackgroundWithBlock { (job: PFObject?, err: NSError?) -> Void in
-            if err === nil {
+          currentJob.getFirstObjectInBackgroundWithBlock { (job: PFObject?, error: NSError?) in
+            if error === nil {
               self.job = job
               
               self.situation = .Customer
@@ -190,8 +177,7 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     }
   }
   
-  func activateSituation()
-  {
+  func activateSituation() {
     navigationController?.popToRootViewControllerAnimated(false)
     
     switch situation {
@@ -249,8 +235,16 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
     determineSituation()
   }
   
+  func finishedLoggingIn() {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return 99
+  }
+  
+  func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+    dismissViewControllerAnimated(true, completion: nil)
   }
   
   /*
@@ -295,10 +289,12 @@ class HireTableViewController: UITableViewController, SessionDelegate, Presentai
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    let companiesTVC = segue.destinationViewController as! CompaniesTableViewController
-    let companies = sender as! [PFObject]
+    let companiesTabelViewController = segue.destinationViewController as! CompaniesQueryTableViewController
+    let service = sender as? UITableViewCell
     
-    companiesTVC.companies = companies
+    println(service?.textLabel?.text)
+    
+    companiesTabelViewController.parseClassName = service?.textLabel?.text
   }
   
   

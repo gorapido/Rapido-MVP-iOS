@@ -8,22 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		DE131C411677E8B3926CFE25 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67BEBE4853E57632519F44F7 /* libPods.a */; };
-		FA0C7BB31AE15E0800BCBFEF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */; };
+		FA04C2231B3875FC00E38813 /* EditAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04C2221B3875FC00E38813 /* EditAddressViewController.swift */; };
+		FA1273F01B31F36F001AC3DF /* CompaniesQueryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */; };
 		FA1E021B1AF1C1FA00BECA5C /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */; };
 		FA31DC0F1AF122F90038743F /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31DC0E1AF122F90038743F /* AskViewController.swift */; };
-		FA4CC9AF1B2B15DC00408DFB /* EditProfileFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9AE1B2B15DC00408DFB /* EditProfileFormViewController.swift */; };
-		FA4CC9B11B2B16D700408DFB /* ChangePasswordFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9B01B2B16D700408DFB /* ChangePasswordFormViewController.swift */; };
-		FA4CC9B31B2B392B00408DFB /* OptionsFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9B21B2B392B00408DFB /* OptionsFormViewController.swift */; };
+		FA374AD81B37DA600091D3D0 /* HireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA374AD71B37DA600091D3D0 /* HireViewController.swift */; };
+		FA374ADC1B37DDC40091D3D0 /* GRJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA374ADB1B37DDC40091D3D0 /* GRJob.swift */; };
+		FA4CC9AF1B2B15DC00408DFB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9AE1B2B15DC00408DFB /* EditProfileViewController.swift */; };
+		FA4CC9B11B2B16D700408DFB /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9B01B2B16D700408DFB /* ChangePasswordViewController.swift */; };
+		FA4CC9B31B2B392B00408DFB /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4CC9B21B2B392B00408DFB /* OptionsViewController.swift */; };
 		FA659D6D1AF1507800295AC3 /* CustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */; };
+		FA68DDBE1B2D063900BE2765 /* GRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68DDBD1B2D063900BE2765 /* GRUser.swift */; };
+		FA68DDC01B2D1DB500BE2765 /* GRCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68DDBF1B2D1DB500BE2765 /* GRCompany.swift */; };
 		FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA521AD89081006FED5F /* AppDelegate.swift */; };
 		FA78AA5A1AD89081006FED5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA581AD89081006FED5F /* Main.storyboard */; };
 		FA78AA5C1AD89081006FED5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA5B1AD89081006FED5F /* Images.xcassets */; };
 		FA78AA5F1AD89081006FED5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */; };
 		FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA6A1AD89081006FED5F /* RapidoTests.swift */; };
-		FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8831C71ADABD1D007A3268 /* SignInViewController.swift */; };
 		FA8ADBE61B20BB8C0098F903 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */; };
 		FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B051ADC27920097F89A /* HireTableViewController.swift */; };
 		FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */; };
+		FAA348001B30A31100DCF48B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA347FF1B30A31100DCF48B /* LogInViewController.swift */; };
 		FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8304B1AEFE6900005053F /* PendingViewController.swift */; };
 		FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */; };
 /* End PBXBuildFile section */
@@ -42,13 +47,18 @@
 		088F760CAE9F150CDAD90D8D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		22CB556F8E294DB0B69FC699 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		67BEBE4853E57632519F44F7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FA04C2221B3875FC00E38813 /* EditAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAddressViewController.swift; sourceTree = "<group>"; };
+		FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesQueryTableViewController.swift; sourceTree = "<group>"; };
 		FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		FA31DC0E1AF122F90038743F /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskViewController.swift; sourceTree = "<group>"; };
-		FA4CC9AE1B2B15DC00408DFB /* EditProfileFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileFormViewController.swift; sourceTree = "<group>"; };
-		FA4CC9B01B2B16D700408DFB /* ChangePasswordFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordFormViewController.swift; sourceTree = "<group>"; };
-		FA4CC9B21B2B392B00408DFB /* OptionsFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsFormViewController.swift; sourceTree = "<group>"; };
+		FA374AD71B37DA600091D3D0 /* HireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireViewController.swift; sourceTree = "<group>"; };
+		FA374ADB1B37DDC40091D3D0 /* GRJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRJob.swift; sourceTree = "<group>"; };
+		FA4CC9AE1B2B15DC00408DFB /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		FA4CC9B01B2B16D700408DFB /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		FA4CC9B21B2B392B00408DFB /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerViewController.swift; sourceTree = "<group>"; };
+		FA68DDBD1B2D063900BE2765 /* GRUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRUser.swift; sourceTree = "<group>"; };
+		FA68DDBF1B2D1DB500BE2765 /* GRCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRCompany.swift; sourceTree = "<group>"; };
 		FA78AA4D1AD89081006FED5F /* Rapido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rapido.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA78AA511AD89081006FED5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA78AA521AD89081006FED5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +68,10 @@
 		FA78AA641AD89081006FED5F /* RapidoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RapidoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA78AA691AD89081006FED5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA78AA6A1AD89081006FED5F /* RapidoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidoTests.swift; sourceTree = "<group>"; };
-		FA8831C71ADABD1D007A3268 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		FA9B8B051ADC27920097F89A /* HireTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireTableViewController.swift; sourceTree = "<group>"; };
 		FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesTableViewController.swift; sourceTree = "<group>"; };
+		FAA347FF1B30A31100DCF48B /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		FAB8304B1AEFE6900005053F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		FAFFC1E61B214FC30080F6CE /* Rapido-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rapido-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -103,14 +113,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		FA4CC9AD1B2B15C600408DFB /* Form View Controllers */ = {
+		FA374ADD1B37E77F0091D3D0 /* Old Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA4CC9B21B2B392B00408DFB /* OptionsFormViewController.swift */,
-				FA4CC9AE1B2B15DC00408DFB /* EditProfileFormViewController.swift */,
-				FA4CC9B01B2B16D700408DFB /* ChangePasswordFormViewController.swift */,
+				FA9B8B051ADC27920097F89A /* HireTableViewController.swift */,
+				FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */,
+				FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */,
+				FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */,
+				FAB8304B1AEFE6900005053F /* PendingViewController.swift */,
+				FA31DC0E1AF122F90038743F /* AskViewController.swift */,
+				FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */,
+				FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */,
 			);
-			name = "Form View Controllers";
+			name = "Old Controllers";
+			sourceTree = "<group>";
+		};
+		FA68DDBC1B2D05E700BE2765 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA68DDBD1B2D063900BE2765 /* GRUser.swift */,
+				FA68DDBF1B2D1DB500BE2765 /* GRCompany.swift */,
+				FA374ADB1B37DDC40091D3D0 /* GRJob.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		FA78AA441AD89081006FED5F = {
@@ -136,6 +161,7 @@
 		FA78AA4F1AD89081006FED5F /* Rapido */ = {
 			isa = PBXGroup;
 			children = (
+				FA68DDBC1B2D05E700BE2765 /* Models */,
 				FA8831C41ADABBC1007A3268 /* View Controllers */,
 				FA78AA521AD89081006FED5F /* AppDelegate.swift */,
 				FA78AA581AD89081006FED5F /* Main.storyboard */,
@@ -175,16 +201,13 @@
 		FA8831C41ADABBC1007A3268 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA4CC9AD1B2B15C600408DFB /* Form View Controllers */,
-				FA8831C71ADABD1D007A3268 /* SignInViewController.swift */,
-				FA0C7BB21AE15E0800BCBFEF /* SignUpViewController.swift */,
-				FA9B8B051ADC27920097F89A /* HireTableViewController.swift */,
-				FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */,
-				FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */,
-				FAB8304B1AEFE6900005053F /* PendingViewController.swift */,
-				FA31DC0E1AF122F90038743F /* AskViewController.swift */,
-				FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */,
-				FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */,
+				FA374ADD1B37E77F0091D3D0 /* Old Controllers */,
+				FAA347FF1B30A31100DCF48B /* LogInViewController.swift */,
+				FA374AD71B37DA600091D3D0 /* HireViewController.swift */,
+				FA4CC9B21B2B392B00408DFB /* OptionsViewController.swift */,
+				FA4CC9AE1B2B15DC00408DFB /* EditProfileViewController.swift */,
+				FA04C2221B3875FC00E38813 /* EditAddressViewController.swift */,
+				FA4CC9B01B2B16D700408DFB /* ChangePasswordViewController.swift */,
 				FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */,
 			);
 			name = "View Controllers";
@@ -332,18 +355,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA31DC0F1AF122F90038743F /* AskViewController.swift in Sources */,
-				FA0C7BB31AE15E0800BCBFEF /* SignUpViewController.swift in Sources */,
 				FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */,
 				FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */,
 				FA659D6D1AF1507800295AC3 /* CustomerViewController.swift in Sources */,
-				FA8831C81ADABD1D007A3268 /* SignInViewController.swift in Sources */,
 				FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */,
+				FA68DDBE1B2D063900BE2765 /* GRUser.swift in Sources */,
 				FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */,
-				FA4CC9B11B2B16D700408DFB /* ChangePasswordFormViewController.swift in Sources */,
-				FA4CC9B31B2B392B00408DFB /* OptionsFormViewController.swift in Sources */,
+				FA4CC9B11B2B16D700408DFB /* ChangePasswordViewController.swift in Sources */,
+				FAA348001B30A31100DCF48B /* LogInViewController.swift in Sources */,
+				FA68DDC01B2D1DB500BE2765 /* GRCompany.swift in Sources */,
+				FA4CC9B31B2B392B00408DFB /* OptionsViewController.swift in Sources */,
 				FA1E021B1AF1C1FA00BECA5C /* EmployeeViewController.swift in Sources */,
 				FA8ADBE61B20BB8C0098F903 /* WebViewController.swift in Sources */,
-				FA4CC9AF1B2B15DC00408DFB /* EditProfileFormViewController.swift in Sources */,
+				FA04C2231B3875FC00E38813 /* EditAddressViewController.swift in Sources */,
+				FA4CC9AF1B2B15DC00408DFB /* EditProfileViewController.swift in Sources */,
+				FA374ADC1B37DDC40091D3D0 /* GRJob.swift in Sources */,
+				FA1273F01B31F36F001AC3DF /* CompaniesQueryTableViewController.swift in Sources */,
+				FA374AD81B37DA600091D3D0 /* HireViewController.swift in Sources */,
 				FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
