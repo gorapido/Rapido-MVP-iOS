@@ -60,19 +60,16 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     let street = XLFormRowDescriptor(tag: "street", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     street.cellConfigAtConfigure["textField.placeholder"] = "Street"
-    
     street.required = true
     
     let city = XLFormRowDescriptor(tag: "city", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     city.cellConfigAtConfigure["textField.placeholder"] = "City"
-    
     city.required = true
     
     let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: "State")
     
     state.cellConfigAtConfigure["textField.placeholder"] = "State"
-    
     //state.required = true
     state.disabled = true
     state.value = "FL"
@@ -80,7 +77,6 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     postalCode.cellConfigAtConfigure["textField.placeholder"] = "Postal Code"
-    
     postalCode.required = true
     
     addressSection.addFormRow(street)
@@ -95,12 +91,22 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     let category = XLFormRowDescriptor(tag: "category", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Category")
     
     category.selectorOptions = [
+      // XLFormOptionsObject(value: "Plumbing", displayText: "Plumbing"),
+      // XLFormOptionsObject(value: "Electrical", displayText: "Electrical"),
       XLFormOptionsObject(value: "Air & Heating", displayText: "Air & Heating"),
-      XLFormOptionsObject(value: "Electrical", displayText: "Electrical"),
-      XLFormOptionsObject(value: "Plumbing", displayText: "Plumbing")
+      XLFormOptionsObject(value: "Massage", displayText: "Massage"),
+      XLFormOptionsObject(value: "Computer Repair", displayText: "Computer Repair"),
+      XLFormOptionsObject(value: "Web Development", displayText: "Web Development"),
+      XLFormOptionsObject(value: "Mobile App Development", displayText: "Mobile App Development"),
+      // XLFormOptionsObject(value: "Other", displayText: "Other")
     ]
     
     category.required = true
+    
+    // let other = XLFormRowDescriptor(tag: "other", rowType: XLFormRowDescriptorTypeText, title: nil)
+    
+    // other.cellConfigAtConfigure["textView.placeholder"] = "Other Category"
+    // other.hidden = "$category===0"
     
     let start = XLFormRowDescriptor(tag: "start", rowType: XLFormRowDescriptorTypeDateTime, title: "Preferred Time")
     
@@ -109,7 +115,6 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     let problem = XLFormRowDescriptor(tag: "problem", rowType: XLFormRowDescriptorTypeTextView, title: nil)
     
     problem.cellConfigAtConfigure["textView.placeholder"] = "What's the problem?"
-    
     problem.required = true
     
     detailsSection.addFormRow(category)
