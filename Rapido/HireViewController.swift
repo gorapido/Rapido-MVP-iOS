@@ -18,99 +18,30 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     
     let form = XLFormDescriptor(title: "Hire")
     
-    let personalSection = XLFormSectionDescriptor()
-    
-    form.addFormSection(personalSection)
-    
-    let firstName = XLFormRowDescriptor(tag: "firstName", rowType: XLFormRowDescriptorTypeText, title: nil)
-    
-    firstName.cellConfigAtConfigure["textField.placeholder"] = "first name"
-    
-    firstName.required = true
-    
-    let lastName = XLFormRowDescriptor(tag: "lastName", rowType: XLFormRowDescriptorTypeText, title: nil)
-    
-    lastName.cellConfigAtConfigure["textField.placeholder"] = "last name"
-    
-    lastName.required = true
-    
-    let email = XLFormRowDescriptor(tag: "email", rowType: XLFormRowDescriptorTypeEmail, title: nil)
-    
-    email.cellConfigAtConfigure["textField.placeholder"] = "email"
-    
-    email.required = true
-    
-    email.addValidator(XLFormValidator.emailValidator())
-    
-    let phone = XLFormRowDescriptor(tag: "phone", rowType: XLFormRowDescriptorTypePhone, title: nil)
-    
-    phone.cellConfigAtConfigure["textField.placeholder"] = "phone"
-    
-    phone.required = true
-    
-    personalSection.addFormRow(firstName)
-    personalSection.addFormRow(lastName)
-    personalSection.addFormRow(email)
-    personalSection.addFormRow(phone)
-    
-    let addressSection = XLFormSectionDescriptor()
-    
-    form.addFormSection(addressSection)
-    
-    let street = XLFormRowDescriptor(tag: "street", rowType: XLFormRowDescriptorTypeText, title: nil)
-    
-    street.cellConfigAtConfigure["textField.placeholder"] = "Street"
-    street.required = true
-    
-    let city = XLFormRowDescriptor(tag: "city", rowType: XLFormRowDescriptorTypeText, title: nil)
-    
-    city.cellConfigAtConfigure["textField.placeholder"] = "City"
-    city.required = true
-    
-    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: "State")
-    
-    state.cellConfigAtConfigure["textField.placeholder"] = "State"
-    //state.required = true
-    state.disabled = true
-    state.value = "FL"
-    
-    let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
-    
-    postalCode.cellConfigAtConfigure["textField.placeholder"] = "Postal Code"
-    postalCode.required = true
-    
-    addressSection.addFormRow(street)
-    addressSection.addFormRow(city)
-    addressSection.addFormRow(state)
-    addressSection.addFormRow(postalCode)
-    
     let detailsSection = XLFormSectionDescriptor()
     
     form.addFormSection(detailsSection)
     
     let category = XLFormRowDescriptor(tag: "category", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Category")
     
-    category.selectorOptions = [
-      // XLFormOptionsObject(value: "Plumbing", displayText: "Plumbing"),
-      // XLFormOptionsObject(value: "Electrical", displayText: "Electrical"),
-      XLFormOptionsObject(value: "Air & Heating", displayText: "Air & Heating"),
-      XLFormOptionsObject(value: "Massage", displayText: "Massage"),
-      XLFormOptionsObject(value: "Computer Repair", displayText: "Computer Repair"),
-      XLFormOptionsObject(value: "Web Development", displayText: "Web Development"),
-      XLFormOptionsObject(value: "Mobile App Development", displayText: "Mobile App Development"),
-      // XLFormOptionsObject(value: "Other", displayText: "Other")
-    ]
+    category.selectorOptions = ["Plumbing", "Electrical", "Air & Heating", "Massage", "Computer Assistance & Repair", "Web Development", "Mobile App Development", "Other"]
     
     category.required = true
     
-    // let other = XLFormRowDescriptor(tag: "other", rowType: XLFormRowDescriptorTypeText, title: nil)
+    let other = XLFormRowDescriptor(tag: "other", rowType: XLFormRowDescriptorTypeText, title: "What?")
     
-    // other.cellConfigAtConfigure["textView.placeholder"] = "Other Category"
-    // other.hidden = "$category===0"
+    other.required = true
+    other.hidden = "NOT $category.value contains 'Other'"
     
-    let start = XLFormRowDescriptor(tag: "start", rowType: XLFormRowDescriptorTypeDateTime, title: "Preferred Time")
+    let when = XLFormRowDescriptor(tag: "when", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Start")
+    
+    when.selectorOptions = ["Now", "Later"]
+    when.required = true
+    
+    let start = XLFormRowDescriptor(tag: "start", rowType: XLFormRowDescriptorTypeDateTime, title: "When?")
     
     start.required = true
+    start.hidden = "NOT $when.value contains 'Later'"
     
     let problem = XLFormRowDescriptor(tag: "problem", rowType: XLFormRowDescriptorTypeTextView, title: nil)
     
@@ -118,6 +49,8 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     problem.required = true
     
     detailsSection.addFormRow(category)
+    detailsSection.addFormRow(other)
+    detailsSection.addFormRow(when)
     detailsSection.addFormRow(start)
     detailsSection.addFormRow(problem)
     
@@ -141,14 +74,7 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     
     // Do any additional setup after loading the view.
     if (user != nil) {
-      form.formRowWithTag("firstName").value = user?["firstName"]
-      form.formRowWithTag("lastName").value = user?["lastName"]
-      form.formRowWithTag("email").value = user?["email"]
-      form.formRowWithTag("phone").value = user?["phone"]
       
-      form.formRowWithTag("street").value = user?["street"]
-      form.formRowWithTag("city").value = user?["city"]
-      form.formRowWithTag("postalCode").value = user?["postalCode"]
     }
     else {
       let logInController = LogInViewController()
@@ -184,23 +110,26 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     tableView.deselectRowAtIndexPath(form.indexPathOfFormRow(sender), animated: true)
     
     if formValidationErrors().count == 0 {
-      user!["lastName"] = getFormValue("firstName")
-      user!["lastName"] = getFormValue("lastName")
-      user!["email"] = getFormValue("email")
-      user!["phone"] = getFormValue("phone")
-      
-      user!["street"] = getFormValue("street")
-      user!["city"] = getFormValue("city")
-      user!["state"] = "FL"
-      user!["postalCode"] = getFormValue("postalCode")
-      
-      user?.saveInBackground()
-      
       let job = PFObject(className: "Job")
       
       job["consumer"] = self.user!
-      job["start"] = formValues()!["start"] as! NSDate
-      job["category"] = formValues()!["category"]!.valueData()
+      
+      let category = formValues()!["category"]!.valueData() as! String
+      
+      if category == "Other" {
+        job["category"] = getFormValue("other")
+      }
+      else {
+        job["category"] = category
+      }
+      
+      if let start = formValues()?["start"] as? NSDate {
+        job["start"] = start
+      }
+      else {
+        job["start"] = NSDate()
+      }
+      
       job["problem"] = getFormValue("problem")
       
       job.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
@@ -221,31 +150,16 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
       })
     }
     else {
-      for error in formValidationErrors() {
-        let error = error as! NSError
-        let status = error.userInfo![XLValidationStatusErrorKey] as! XLFormValidationStatus
+      let alert = UIAlertController(title: "Error!", message: "It looks like you left something blank. Make sure everything is filled in.", preferredStyle: UIAlertControllerStyle.Alert)
         
-        if let cell = tableView.cellForRowAtIndexPath(form.indexPathOfFormRow(status.rowDescriptor)) {
-          animateCell(cell)
-        }
-      }
+      alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+        
+      presentViewController(alert, animated: true, completion: nil)
     }
   }
   
   func getFormValue(key: String) -> String! {
     return formValues()![key] as? String
-  }
-  
-  func animateCell(cell: UITableViewCell) {
-    let animation = CAKeyframeAnimation()
-    
-    animation.keyPath = "position.x"
-    animation.values =  [0, 20, -20, 10, 0]
-    animation.keyTimes = [0, (1 / 6.0), (3 / 6.0), (5 / 6.0), 1]
-    animation.duration = 0.3
-    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-    animation.additive = true
-    cell.layer.addAnimation(animation, forKey: "shake")
   }
   
   /*
