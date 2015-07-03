@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DE131C411677E8B3926CFE25 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67BEBE4853E57632519F44F7 /* libPods.a */; };
 		FA04C2231B3875FC00E38813 /* EditAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA04C2221B3875FC00E38813 /* EditAddressViewController.swift */; };
-		FA1273F01B31F36F001AC3DF /* CompaniesQueryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */; };
 		FA1E021B1AF1C1FA00BECA5C /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */; };
 		FA31DC0F1AF122F90038743F /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31DC0E1AF122F90038743F /* AskViewController.swift */; };
 		FA374AD81B37DA600091D3D0 /* HireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA374AD71B37DA600091D3D0 /* HireViewController.swift */; };
@@ -26,11 +25,7 @@
 		FA78AA5F1AD89081006FED5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA78AA5D1AD89081006FED5F /* LaunchScreen.xib */; };
 		FA78AA6B1AD89081006FED5F /* RapidoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78AA6A1AD89081006FED5F /* RapidoTests.swift */; };
 		FA8ADBE61B20BB8C0098F903 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */; };
-		FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B051ADC27920097F89A /* HireTableViewController.swift */; };
-		FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */; };
 		FAA348001B30A31100DCF48B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA347FF1B30A31100DCF48B /* LogInViewController.swift */; };
-		FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8304B1AEFE6900005053F /* PendingViewController.swift */; };
-		FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +43,6 @@
 		22CB556F8E294DB0B69FC699 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		67BEBE4853E57632519F44F7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA04C2221B3875FC00E38813 /* EditAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAddressViewController.swift; sourceTree = "<group>"; };
-		FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesQueryTableViewController.swift; sourceTree = "<group>"; };
 		FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		FA31DC0E1AF122F90038743F /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskViewController.swift; sourceTree = "<group>"; };
 		FA374AD71B37DA600091D3D0 /* HireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireViewController.swift; sourceTree = "<group>"; };
@@ -69,11 +63,7 @@
 		FA78AA691AD89081006FED5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA78AA6A1AD89081006FED5F /* RapidoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidoTests.swift; sourceTree = "<group>"; };
 		FA8ADBE51B20BB8C0098F903 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		FA9B8B051ADC27920097F89A /* HireTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HireTableViewController.swift; sourceTree = "<group>"; };
-		FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesTableViewController.swift; sourceTree = "<group>"; };
 		FAA347FF1B30A31100DCF48B /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		FAB8304B1AEFE6900005053F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
-		FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		FAFFC1E61B214FC30080F6CE /* Rapido-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rapido-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,11 +106,6 @@
 		FA374ADD1B37E77F0091D3D0 /* Old Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA9B8B051ADC27920097F89A /* HireTableViewController.swift */,
-				FA9B8B071ADC31500097F89A /* CompaniesTableViewController.swift */,
-				FA1273EF1B31F36F001AC3DF /* CompaniesQueryTableViewController.swift */,
-				FAFE481C1ADC71AB009159BB /* CompanyViewController.swift */,
-				FAB8304B1AEFE6900005053F /* PendingViewController.swift */,
 				FA31DC0E1AF122F90038743F /* AskViewController.swift */,
 				FA659D6C1AF1507800295AC3 /* CustomerViewController.swift */,
 				FA1E021A1AF1C1FA00BECA5C /* EmployeeViewController.swift */,
@@ -355,12 +340,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA31DC0F1AF122F90038743F /* AskViewController.swift in Sources */,
-				FAB8304C1AEFE6900005053F /* PendingViewController.swift in Sources */,
 				FA78AA531AD89081006FED5F /* AppDelegate.swift in Sources */,
 				FA659D6D1AF1507800295AC3 /* CustomerViewController.swift in Sources */,
-				FA9B8B061ADC27920097F89A /* HireTableViewController.swift in Sources */,
 				FA68DDBE1B2D063900BE2765 /* GRUser.swift in Sources */,
-				FAFE481D1ADC71AB009159BB /* CompanyViewController.swift in Sources */,
 				FA4CC9B11B2B16D700408DFB /* ChangePasswordViewController.swift in Sources */,
 				FAA348001B30A31100DCF48B /* LogInViewController.swift in Sources */,
 				FA68DDC01B2D1DB500BE2765 /* GRCompany.swift in Sources */,
@@ -370,9 +352,7 @@
 				FA04C2231B3875FC00E38813 /* EditAddressViewController.swift in Sources */,
 				FA4CC9AF1B2B15DC00408DFB /* EditProfileViewController.swift in Sources */,
 				FA374ADC1B37DDC40091D3D0 /* GRJob.swift in Sources */,
-				FA1273F01B31F36F001AC3DF /* CompaniesQueryTableViewController.swift in Sources */,
 				FA374AD81B37DA600091D3D0 /* HireViewController.swift in Sources */,
-				FA9B8B081ADC31500097F89A /* CompaniesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

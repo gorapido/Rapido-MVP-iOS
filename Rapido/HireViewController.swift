@@ -9,6 +9,10 @@
 import UIKit
 import MobileCoreServices
 
+protocol GRLogInViewControllerDelegate: PFLogInViewControllerDelegate {
+  func finishedLoggingIn()
+}
+
 class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
   
   var user: PFUser?
