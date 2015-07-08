@@ -65,27 +65,12 @@ class ChangePasswordViewController: XLFormViewController {
       }
     }
     else {
-      for error in formValidationErrors() {
-        let error = error as! NSError
-        let status = error.userInfo![XLValidationStatusErrorKey] as! XLFormValidationStatus
-        
-        if let cell = tableView.cellForRowAtIndexPath(form.indexPathOfFormRow(status.rowDescriptor)) {
-          animateCell(cell)
-        }
-      }
+      let alert = UIAlertController(title: "Error!", message: "It looks like you left something blank. Make sure everything is filled in.", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+      
+      presentViewController(alert, animated: true, completion: nil)
     }
-  }
-  
-  func animateCell(cell: UITableViewCell) {
-    let animation = CAKeyframeAnimation()
-    
-    animation.keyPath = "position.x"
-    animation.values =  [0, 20, -20, 10, 0]
-    animation.keyTimes = [0, (1 / 6.0), (3 / 6.0), (5 / 6.0), 1]
-    animation.duration = 0.3
-    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-    animation.additive = true
-    cell.layer.addAnimation(animation, forKey: "shake")
   }
   
   /*

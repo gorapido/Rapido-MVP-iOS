@@ -1,42 +1,34 @@
 //
-//  LogInViewController.swift
+//  SignUpViewController.swift
 //  Rapido
 //
-//  Created by Alexander Hernandez on 6/16/15.
+//  Created by Alexander Hernandez on 7/6/15.
 //  Copyright (c) 2015 Rapido. All rights reserved.
 //
 
 import UIKit
 
-class LogInViewController: PFLogInViewController, PFSignUpViewControllerDelegate {
+class SignUpViewController: PFSignUpViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    emailAsUsername = true
+    
     let logo = UIImage(named: "Rapido")
     
     let imageView = UIImageView(image: logo)
-
+    
+    imageView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
     imageView.contentMode = .ScaleAspectFit
-    imageView.clipsToBounds = true
     
-    logInView?.logo = imageView
-    
-    println(logo!.size.height)
-    
-    signUpController = SignUpViewController()
-    signUpController?.delegate = self
+    signUpView?.logo = imageView
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-  }
-  
-  func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
-    (delegate as! GRLogInViewControllerDelegate).finishedLoggingIn()
-    dismissViewControllerAnimated(true, completion: nil)
   }
   
   /*

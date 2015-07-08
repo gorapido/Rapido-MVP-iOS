@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, PFLogInViewControllerDelegate {
+class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, GRLogInViewControllerDelegate, FinishedPresentationViewControllerDelegate {
   
   var user: PFUser?
   
@@ -140,13 +140,10 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
     
     //tabBarController?.selectedIndex = 0
     
-    let logInController = PFLogInViewController()
+    let logInController = LogInViewController()
     
     logInController.delegate = self
     logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten | PFLogInFields.Facebook)
-    logInController.logInView?.logo = nil
-    logInController.signUpController?.emailAsUsername = true
-    logInController.signUpController?.signUpView?.logo = nil
     
     presentViewController(logInController, animated: true, completion: nil)
   }
@@ -195,7 +192,21 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
     dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+  func finishedLoggingIn() {
+    dismissViewControllerAnimated(true, completion: nil)
+    
+    let user = PFUser.currentUser()
+    
+    if user?.isNew == true {
+      let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
+      
+      completeSignUpViewController.delegate = self
+      
+      presentViewController(completeSignUpViewController, animated: true, completion: nil)
+    }
+  }
+  
+  func finishedPresentation() {
     dismissViewControllerAnimated(true, completion: nil)
   }
   

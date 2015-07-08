@@ -13,7 +13,11 @@ protocol GRLogInViewControllerDelegate: PFLogInViewControllerDelegate {
   func finishedLoggingIn()
 }
 
-class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
+protocol FinishedPresentationViewControllerDelegate {
+  func finishedPresentation()
+}
+
+class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, FinishedPresentationViewControllerDelegate {
   
   var user: PFUser?
   
@@ -74,9 +78,9 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Do any additional setup after loading the view.
     user = PFUser.currentUser()
     
-    // Do any additional setup after loading the view.
     if (user != nil) {
       
     }
@@ -101,13 +105,17 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     }
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if user == nil {
+      user = PFUser.currentUser()
+    }
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-  }
-  
-  func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-    dismissViewControllerAnimated(true, completion: nil)
   }
   
   func didTouchSubmit(sender: XLFormRowDescriptor) {
@@ -116,7 +124,7 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
     if formValidationErrors().count == 0 {
       let job = PFObject(className: "Job")
       
-      job["consumer"] = self.user!
+      job["consumer"] = user
       
       let category = formValues()!["category"]!.valueData() as! String
       
@@ -160,10 +168,42 @@ class HireViewController: XLFormViewController, PFLogInViewControllerDelegate {
         
       presentViewController(alert, animated: true, completion: nil)
     }
+    
+    form.formRowWithTag("category").value = nil
+    form.formRowWithTag("other").value = nil
+    form.formRowWithTag("start").value = nil
+    form.formRowWithTag("when").value = nil
+    form.formRowWithTag("problem").value = nil
+    
+    tableView.reloadData()
   }
   
   func getFormValue(key: String) -> String! {
     return formValues()![key] as? String
+  }
+  
+  func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func finishedLoggingIn() {
+    dismissViewControllerAnimated(true, completion: nil)
+    
+    let user = PFUser.currentUser()
+    
+    self.user = user
+    
+    if user?.isNew == true {
+      let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
+      
+      completeSignUpViewController.delegate = self
+      
+      presentViewController(completeSignUpViewController, animated: true, completion: nil)
+    }
+  }
+  
+  func finishedPresentation() {
+    dismissViewControllerAnimated(true, completion: nil)
   }
   
   /*
