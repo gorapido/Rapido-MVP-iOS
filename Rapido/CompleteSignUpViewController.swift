@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol CompleteSignUpViewControllerDelegate {
+  func finishedPresentation()
+}
+
 class CompleteSignUpViewController: XLFormViewController {
   
   var user: PFUser?
-  var delegate: FinishedPresentationViewControllerDelegate?
+  var delegate: CompleteSignUpViewControllerDelegate?
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -115,18 +119,17 @@ class CompleteSignUpViewController: XLFormViewController {
   }
   
   func didTouchSubmit(sender: XLFormRowDescriptor) {
-    tableView.deselectRowAtIndexPath(form.indexPathOfFormRow(sender), animated: true)
+    tableView.deselectRowAtIndexPath(form.indexPathOfFormRow(sender)!, animated: true)
     
     if formValidationErrors().count == 0 {
+      user!.setObject(getFormValue("firstName"), forKey: "firstName")
+      user!.setObject(getFormValue("lastName"), forKey: "lastName")
+      user!.setObject(getFormValue("phone"), forKey: "phone")
       
-      user!["firstName"] = getFormValue("firstName")
-      user!["lastName"] = getFormValue("lastName")
-      user!["phone"] = getFormValue("phone")
-      
-      user!["street"] = getFormValue("street")
-      user!["city"] = getFormValue("city")
-      user!["state"] = getFormValue("state")
-      user!["postalCode"] = getFormValue("postalCode")
+      user!.setObject(getFormValue("street"), forKey: "street")
+      user!.setObject(getFormValue("city"), forKey: "city")
+      user!.setObject(getFormValue("state"), forKey: "state")
+      user!.setObject(getFormValue("postalCode"), forKey: "postalCode")
       
       user!.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
         if error === nil {

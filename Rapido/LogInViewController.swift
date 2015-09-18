@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol LogInViewControllerDelegate: PFLogInViewControllerDelegate {
+  func finishedLoggingIn()
+}
+
 class LogInViewController: PFLogInViewController, PFSignUpViewControllerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    facebookPermissions = ["public_profile", "email"]
+    
     let logo = UIImage(named: "Rapido")
     
     let imageView = UIImageView(image: logo)
@@ -35,7 +41,7 @@ class LogInViewController: PFLogInViewController, PFSignUpViewControllerDelegate
   }
   
   func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
-    (delegate as! GRLogInViewControllerDelegate).finishedLoggingIn()
+    (delegate as! LogInViewControllerDelegate).finishedLoggingIn()
     dismissViewControllerAnimated(true, completion: nil)
   }
   

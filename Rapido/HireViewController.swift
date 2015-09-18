@@ -9,15 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-protocol GRLogInViewControllerDelegate: PFLogInViewControllerDelegate {
-  func finishedLoggingIn()
-}
-
-protocol FinishedPresentationViewControllerDelegate {
-  func finishedPresentation()
-}
-
-class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, FinishedPresentationViewControllerDelegate {
+class HireViewController: XLFormViewController, LogInViewControllerDelegate, CompleteSignUpViewControllerDelegate {
   
   var user: PFUser?
   
@@ -32,7 +24,7 @@ class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, F
     
     let category = XLFormRowDescriptor(tag: "category", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Category")
     
-    category.selectorOptions = ["Plumbing", "Electrical", "Air & Heating", "Massage", "Computer Assistance & Repair", "Web Development", "Mobile App Development", "Other"]
+    category.selectorOptions = ["Plumbing", "Electrical", "Air & Heating", "Massage", "Lawn"]
     
     category.required = true
     
@@ -43,13 +35,13 @@ class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, F
     
     let when = XLFormRowDescriptor(tag: "when", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Start")
     
-    when.selectorOptions = ["Now", "Later"]
+    when.selectorOptions = ["ANY TIME 8am - 8pm", "MORNING 8am - 12pm", "AFTERNOON 12pm - 4pm", "EVENING 4pm - 8pm"]
     when.required = true
     
-    let start = XLFormRowDescriptor(tag: "start", rowType: XLFormRowDescriptorTypeDateTime, title: "When?")
+    let start = XLFormRowDescriptor(tag: "start", rowType: XLFormRowDescriptorTypeDate, title: "When?")
     
     start.required = true
-    start.hidden = "NOT $when.value contains 'Later'"
+    // start.hidden = "NOT $when.value contains 'Later'"
     
     let problem = XLFormRowDescriptor(tag: "problem", rowType: XLFormRowDescriptorTypeTextView, title: nil)
     
@@ -119,30 +111,32 @@ class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, F
   }
   
   func didTouchSubmit(sender: XLFormRowDescriptor) {
-    tableView.deselectRowAtIndexPath(form.indexPathOfFormRow(sender), animated: true)
+    tableView.deselectRowAtIndexPath(form.indexPathOfFormRow(sender)!, animated: true)
     
     if formValidationErrors().count == 0 {
       let job = PFObject(className: "Job")
       
-      job["consumer"] = user
+      job.setObject(user!, forKey: "consumer")
       
       let category = formValues()!["category"]!.valueData() as! String
       
       if category == "Other" {
-        job["category"] = getFormValue("other")
+        job.setObject(getFormValue("other"), forKey: "category")
       }
       else {
-        job["category"] = category
+        job.setObject(category, forKey: "category")
       }
+      
+      job.setObject(formValues()!["when"]!, forKey: "when")
       
       if let start = formValues()?["start"] as? NSDate {
-        job["start"] = start
+        job.setObject(start, forKey: "start")
       }
       else {
-        job["start"] = NSDate()
+        job.setObject(NSDate(), forKey: "start")
       }
       
-      job["problem"] = getFormValue("problem")
+      job.setObject(getFormValue("problem"), forKey: "problem")
       
       job.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
         if error === nil {
@@ -169,11 +163,11 @@ class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, F
       presentViewController(alert, animated: true, completion: nil)
     }
     
-    form.formRowWithTag("category").value = nil
-    form.formRowWithTag("other").value = nil
-    form.formRowWithTag("start").value = nil
-    form.formRowWithTag("when").value = nil
-    form.formRowWithTag("problem").value = nil
+    form.formRowWithTag("category")!.value = nil
+    form.formRowWithTag("other")!.value = nil
+    form.formRowWithTag("start")!.value = nil
+    form.formRowWithTag("when")!.value = nil
+    form.formRowWithTag("problem")!.value = nil
     
     tableView.reloadData()
   }
@@ -193,7 +187,10 @@ class HireViewController: XLFormViewController, GRLogInViewControllerDelegate, F
     
     self.user = user
     
-    if user?.isNew == true {
+    if let street = user!.objectForKey("street") as? String {
+      
+    }
+    else {
       let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
       
       completeSignUpViewController.delegate = self

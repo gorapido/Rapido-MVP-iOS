@@ -65,10 +65,10 @@ class EditProfileViewController: XLFormViewController {
     // Do any additional setup after loading the view.
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "validateForm:")
     
-    form.formRowWithTag("firstName").value = user!["firstName"]
-    form.formRowWithTag("lastName").value = user!["lastName"]
-    form.formRowWithTag("email").value = user!["email"]
-    form.formRowWithTag("phone").value = user!["phone"]
+    form.formRowWithTag("firstName")!.value = user!.objectForKey("firstName")
+    form.formRowWithTag("lastName")!.value = user!.objectForKey("lastName")
+    form.formRowWithTag("email")!.value = user!.objectForKey("email")
+    form.formRowWithTag("phone")!.value = user!.objectForKey("phone")
   }
   
   override func didReceiveMemoryWarning() {
@@ -78,10 +78,10 @@ class EditProfileViewController: XLFormViewController {
   
   func validateForm(button: UIBarButtonItem) {
     if formValidationErrors().count == 0 {
-      user!["firstName"] = formValues()!["firstName"]
-      user!["lastName"] = formValues()!["lastName"]
-      user!["email"] = formValues()!["email"]
-      user!["phone"] = formValues()!["phone"]
+      user!.setObject(formValues()!["firstName"]!, forKey: "firstName")
+      user!.setObject(formValues()!["lastName"]!, forKey: "lastName")
+      user!.setObject(formValues()!["email"]!, forKey: "email")
+      user!.setObject(formValues()!["phone"]!, forKey: "phone")
       
       user?.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
         if (finished) {

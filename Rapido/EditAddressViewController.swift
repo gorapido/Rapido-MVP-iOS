@@ -37,9 +37,9 @@ class EditAddressViewController: XLFormViewController {
     
     state.cellConfigAtConfigure["textField.placeholder"] = "State"
     
-    //state.required = true
-    state.disabled = true
-    state.value = "FL"
+    state.required = true
+    // state.disabled = true
+    // state.value = "FL"
     
     let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
     
@@ -61,9 +61,10 @@ class EditAddressViewController: XLFormViewController {
     // Do any additional setup after loading the view.
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "validateForm:")
     
-    form.formRowWithTag("street").value = user?["street"]
-    form.formRowWithTag("city").value = user?["city"]
-    form.formRowWithTag("postalCode").value = user?["postalCode"]
+    form.formRowWithTag("street")!.value = user!.objectForKey("street")
+    form.formRowWithTag("city")!.value = user!.objectForKey("city")
+    form.formRowWithTag("state")!.value = user!.objectForKey("state")
+    form.formRowWithTag("postalCode")!.value = user!.objectForKey("postalCode")
   }
   
   override func didReceiveMemoryWarning() {
@@ -73,9 +74,10 @@ class EditAddressViewController: XLFormViewController {
   
   func validateForm(button: UIBarButtonItem) {
     if formValidationErrors().count == 0 {
-      user!["street"] = formValues()!["street"]
-      user!["city"] = formValues()!["city"]
-      user!["postalCode"] = formValues()!["postalCode"]
+      user!.setObject(formValues()!["street"]!, forKey: "street")
+      user!.setObject(formValues()!["city"]!, forKey: "city")
+      user!.setObject(formValues()!["state"]!, forKey: "state")
+      user!.setObject(formValues()!["postalCode"]!, forKey: "postalCode")
       
       user?.saveInBackgroundWithBlock({ (finished: Bool, error: NSError?) -> Void in
         if (finished) {

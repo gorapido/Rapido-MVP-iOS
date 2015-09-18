@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, GRLogInViewControllerDelegate, FinishedPresentationViewControllerDelegate {
+class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, LogInViewControllerDelegate, CompleteSignUpViewControllerDelegate {
   
   var user: PFUser?
   
