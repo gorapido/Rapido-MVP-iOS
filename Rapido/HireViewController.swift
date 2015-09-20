@@ -85,6 +85,17 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
       presentViewController(logInController, animated: false, completion: nil)
     }
     
+    if let phone = user!.objectForKey("phone") as? String {
+      
+    }
+    else {
+      let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
+      
+      completeSignUpViewController.delegate = self
+      
+      presentViewController(completeSignUpViewController, animated: true, completion: nil)
+    }
+    
     let lightGray = UIColor(red: 0xCC, green: 0xCC, blue: 0xCC, alpha: 1)
     
     UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: lightGray], forState: .Normal)
@@ -152,6 +163,14 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
           alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
           
           self.presentViewController(alert, animated: true, completion: nil)
+          
+          self.form.formRowWithTag("category")!.value = nil
+          self.form.formRowWithTag("other")!.value = nil
+          self.form.formRowWithTag("start")!.value = nil
+          self.form.formRowWithTag("when")!.value = nil
+          self.form.formRowWithTag("problem")!.value = nil
+          
+          self.tableView.reloadData()
         }
       })
     }
@@ -162,14 +181,6 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
         
       presentViewController(alert, animated: true, completion: nil)
     }
-    
-    form.formRowWithTag("category")!.value = nil
-    form.formRowWithTag("other")!.value = nil
-    form.formRowWithTag("start")!.value = nil
-    form.formRowWithTag("when")!.value = nil
-    form.formRowWithTag("problem")!.value = nil
-    
-    tableView.reloadData()
   }
   
   func getFormValue(key: String) -> String! {
@@ -187,7 +198,7 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
     
     self.user = user
     
-    if let street = user!.objectForKey("street") as? String {
+    if let phone = user!.objectForKey("phone") as? String {
       
     }
     else {
