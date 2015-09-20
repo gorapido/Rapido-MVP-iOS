@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CompleteSignUpViewControllerDelegate {
-  func finishSigningUp()
+  func finishedSigningUp()
 }
 
 class CompleteSignUpViewController: XLFormViewController {
@@ -46,6 +46,16 @@ class CompleteSignUpViewController: XLFormViewController {
     lastName.cellConfigAtConfigure["textField.placeholder"] = "last name"
     lastName.required = true
     
+    let email = XLFormRowDescriptor(tag: "email", rowType: XLFormRowDescriptorTypePhone, title: nil)
+    
+    email.cellConfigAtConfigure["textField.placeholder"] = "email"
+    email.required = true
+    email.disabled = true
+    
+    if user?.objectForKey("email") == nil {
+      email.disabled = false
+    }
+    
     let phone = XLFormRowDescriptor(tag: "phone", rowType: XLFormRowDescriptorTypePhone, title: nil)
     
     phone.cellConfigAtConfigure["textField.placeholder"] = "phone"
@@ -54,6 +64,7 @@ class CompleteSignUpViewController: XLFormViewController {
     
     personalSection.addFormRow(firstName)
     personalSection.addFormRow(lastName)
+    personalSection.addFormRow(email)
     personalSection.addFormRow(phone)
     
     let addressSection = XLFormSectionDescriptor()
@@ -74,7 +85,7 @@ class CompleteSignUpViewController: XLFormViewController {
     
     city.required = true
     
-    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: "State")
+    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     state.cellConfigAtConfigure["textField.placeholder"] = "State"
     
@@ -124,6 +135,11 @@ class CompleteSignUpViewController: XLFormViewController {
     if formValidationErrors().count == 0 {
       user!.setObject(getFormValue("firstName"), forKey: "firstName")
       user!.setObject(getFormValue("lastName"), forKey: "lastName")
+      
+      if user?.objectForKey("email") == nil {
+        user!.setObject(getFormValue("email"), forKey: "email")
+      }
+      
       user!.setObject(getFormValue("phone"), forKey: "phone")
       
       user!.setObject(getFormValue("street"), forKey: "street")
@@ -136,7 +152,7 @@ class CompleteSignUpViewController: XLFormViewController {
           let alert = UIAlertController(title: "Hooray!", message: "You have successfully signed up for Rapido. You can start requesting service right away.", preferredStyle: UIAlertControllerStyle.Alert)
           
           alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
-            self.delegate?.finishSigningUp()
+            self.delegate?.finishedSigningUp()
           }))
           
           self.presentViewController(alert, animated: true, completion: nil)

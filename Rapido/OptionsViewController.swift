@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate, LogInViewControllerDelegate, CompleteSignUpViewControllerDelegate {
+class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDelegate {
   
   var user: PFUser?
   
@@ -75,10 +75,6 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
     
     form.addFormSection(businessSection)
     
-    let rateRapido = XLFormRowDescriptor(tag: "rateRapido", rowType: XLFormRowDescriptorTypeButton, title: "Rate Rapido")
-    
-    rateRapido.action.formSelector = "didTouchRateRapido:"
-    
     let contactUs = XLFormRowDescriptor(tag: "contactUs", rowType: XLFormRowDescriptorTypeButton, title: "Contact Us")
     
     contactUs.action.formSelector = "didTouchContactUs:"
@@ -91,7 +87,6 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
     
     privacyPolicy.action.formSelector = "didTouchPrivacyPolicy:"
     
-    businessSection.addFormRow(rateRapido)
     businessSection.addFormRow(contactUs)
     businessSection.addFormRow(termsAndAgreement)
     businessSection.addFormRow(privacyPolicy)
@@ -138,14 +133,7 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
   func didTouchSignOut(sender: XLFormRowDescriptor) {
     PFUser.logOut()
     
-    //tabBarController?.selectedIndex = 0
-    
-    let logInController = LogInViewController()
-    
-    logInController.delegate = self
-    logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten | PFLogInFields.Facebook)
-    
-    presentViewController(logInController, animated: true, completion: nil)
+    tabBarController?.selectedIndex = 0
   }
   
   func didTouchFacebook(sender: XLFormRowDescriptor) {
@@ -157,15 +145,11 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
   }
   
   func didTouchInstagram(sender: XLFormRowDescriptor) {
-    performSegueWithIdentifier("WebViewControllerSegue1", sender: "https://instagram.com/gorapido.co/")
+    performSegueWithIdentifier("WebViewControllerSegue1", sender: "https://instagram.com/gorapido.co")
   }
   
   func didTouchLinkedIn(sender: XLFormRowDescriptor) {
-    performSegueWithIdentifier("WebViewControllerSegue1", sender: "https://www.linkedin.com/company/9381006")
-  }
-  
-  func didTouchRateRapido(sender: XLFormRowDescriptor) {
-    performSegueWithIdentifier("WebViewControllerSegue1", sender: "https://www.surveymonkey.com/s/FWCMFBG")
+    performSegueWithIdentifier("WebViewControllerSegue1", sender: "https://www.linkedin.com/companies/go-rapido")
   }
   
   func didTouchContactUs(sender: XLFormRowDescriptor) {
@@ -185,28 +169,6 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
   }
   
   func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-    dismissViewControllerAnimated(true, completion: nil)
-  }
-  
-  func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
-    dismissViewControllerAnimated(true, completion: nil)
-  }
-  
-  func finishedLoggingIn() {
-    dismissViewControllerAnimated(true, completion: nil)
-    
-    let user = PFUser.currentUser()
-    
-    if user?.isNew == true {
-      let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
-      
-      completeSignUpViewController.delegate = self
-      
-      presentViewController(completeSignUpViewController, animated: true, completion: nil)
-    }
-  }
-  
-  func finishSigningUp() {
     dismissViewControllerAnimated(true, completion: nil)
   }
   

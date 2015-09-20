@@ -71,31 +71,6 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    user = PFUser.currentUser()
-    
-    if (user != nil) {
-      
-    }
-    else {
-      let logInController = LogInViewController()
-      
-      logInController.delegate = self
-      logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten | PFLogInFields.Facebook)
-      
-      presentViewController(logInController, animated: false, completion: nil)
-    }
-    
-    if let phone = user!.objectForKey("phone") as? String {
-      
-    }
-    else {
-      let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
-      
-      completeSignUpViewController.delegate = self
-      
-      presentViewController(completeSignUpViewController, animated: true, completion: nil)
-    }
-    
     let lightGray = UIColor(red: 0xCC, green: 0xCC, blue: 0xCC, alpha: 1)
     
     UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: lightGray], forState: .Normal)
@@ -106,13 +81,42 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
         item.image = image.imageWithRenderingMode(.AlwaysOriginal)
       }
     }
+    
+    common()
   }
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    if user == nil {
+    /* if user == nil {
       user = PFUser.currentUser()
+    } */
+    
+    common()
+  }
+  
+  func common() {
+    user = PFUser.currentUser()
+    
+    if (user != nil) {
+      if let phone = user?.objectForKey("phone") as? String {
+        
+      }
+      else {
+        let completeSignUpViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteSignUp") as! CompleteSignUpViewController
+        
+        completeSignUpViewController.delegate = self
+        
+        presentViewController(completeSignUpViewController, animated: true, completion: nil)
+      }
+    }
+    else {
+      let logInController = LogInViewController()
+      
+      logInController.delegate = self
+      logInController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten | PFLogInFields.Facebook)
+      
+      presentViewController(logInController, animated: false, completion: nil)
     }
   }
   
@@ -210,7 +214,7 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
     }
   }
   
-  func finishSigningUp() {
+  func finishedSigningUp() {
     dismissViewControllerAnimated(true, completion: nil)
   }
   
