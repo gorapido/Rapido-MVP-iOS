@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CompleteSignUpViewControllerDelegate {
-  func finishedPresentation()
+  func finishSigningUp()
 }
 
 class CompleteSignUpViewController: XLFormViewController {
@@ -78,8 +78,8 @@ class CompleteSignUpViewController: XLFormViewController {
     
     state.cellConfigAtConfigure["textField.placeholder"] = "State"
     
-    //state.required = true
-    state.disabled = true
+    state.required = true
+    // state.disabled = true
     state.value = "FL"
     
     let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
@@ -136,7 +136,7 @@ class CompleteSignUpViewController: XLFormViewController {
           let alert = UIAlertController(title: "Hooray!", message: "You have successfully signed up for Rapido. You can start requesting service right away.", preferredStyle: UIAlertControllerStyle.Alert)
           
           alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
-            self.delegate?.finishedPresentation()
+            self.delegate?.finishSigningUp()
           }))
           
           self.presentViewController(alert, animated: true, completion: nil)

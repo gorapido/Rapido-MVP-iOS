@@ -206,7 +206,7 @@ class OptionsViewController: XLFormViewController, MFMailComposeViewControllerDe
     }
   }
   
-  func finishedPresentation() {
+  func finishSigningUp() {
     dismissViewControllerAnimated(true, completion: nil)
   }
   

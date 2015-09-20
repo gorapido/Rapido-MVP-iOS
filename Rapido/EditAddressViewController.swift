@@ -33,13 +33,13 @@ class EditAddressViewController: XLFormViewController {
     
     city.required = true
     
-    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: "State")
+    let state = XLFormRowDescriptor(tag: "state", rowType: XLFormRowDescriptorTypeText, title: nil)
     
     state.cellConfigAtConfigure["textField.placeholder"] = "State"
     
     state.required = true
     // state.disabled = true
-    // state.value = "FL"
+    state.value = "FL"
     
     let postalCode = XLFormRowDescriptor(tag: "postalCode", rowType: XLFormRowDescriptorTypeText, title: nil)
     

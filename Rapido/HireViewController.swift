@@ -199,7 +199,7 @@ class HireViewController: XLFormViewController, LogInViewControllerDelegate, Com
     }
   }
   
-  func finishedPresentation() {
+  func finishSigningUp() {
     dismissViewControllerAnimated(true, completion: nil)
   }
   
